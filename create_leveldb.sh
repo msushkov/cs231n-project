@@ -1,16 +1,8 @@
 #!/usr/bin/env sh
 # Create the lmdb inputs
-# N.B. set the path to the train + val data dirs
+# N.B. set the path to the train + val data dirs in set_env.sh
 
-
-TOOLS=/home/caffe/build/tools
-
-TRAIN_DATA_ROOT=/path/to/train/
-VAL_DATA_ROOT=/path/to/val/
-
-TRAIN_LABEL_FILE=/path/to/train/labels/and/image/filepaths
-VAL_LABEL_FILE=/path/to/val/labels/and/image/filepaths
-
+TOOLS=$CAFFE_ROOT/build/tools
 
 # Set RESIZE=true to resize the images to 256x256. Leave as false if images have
 # already been resized using another tool.
@@ -44,7 +36,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $TRAIN_DATA_ROOT \
-    $TRAIN_LABEL_FILE \
+    $TRAIN_DATA_ROOT/caffe.txt \
     $TRAIN_DATA_ROOT/train_lmdb
 
 echo "Creating val lmdb..."
@@ -54,7 +46,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $VAL_DATA_ROOT \
-    $VAL_LABEL_FILE \
+    $VAL_DATA_ROOT/caffe.txt \
     $VAL_DATA_ROOT/val_lmdb
 
 echo "Done."

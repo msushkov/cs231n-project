@@ -10,11 +10,13 @@ import os.path
 # USER_DEFINED VARIABLES
 ###
 
+# for which directory do we want to generate the caffe.txt file?
 DIR = "data/sample/train"
-label_key_file = "label_key.txt"
-out_filename = "caffe_labels_sample.txt"
 
 ###############
+
+label_key_file = os.environ['LABEL_KEY']
+out_filename = os.environ['LABEL_FILENAME']
 
 directory = os.path.join(os.getcwd(), DIR)
 out_file_full_path = os.path.join(directory, out_filename)

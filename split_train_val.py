@@ -72,7 +72,7 @@ for directory in directories:
 	filenames = get_image_filenames(directory)
 	shuffle(filenames)
 	
-	train_end_index = int(len(filenames) * 0.7)
+	train_end_index = int(len(filenames) * train_split)
 	train_filenames = set(filenames[:train_end_index])
 	val_filenames = set(filenames[train_end_index:])
 

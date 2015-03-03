@@ -10,23 +10,25 @@ import os.path
 # USER_DEFINED VARIABLES
 ###
 
-DIR = "data/sample"
+DIR = "data/sample/train"
+label_key_file = "label_key.txt"
 out_filename = "caffe_labels_sample.txt"
 
 ###############
 
 directory = os.path.join(os.getcwd(), DIR)
 out_file_full_path = os.path.join(directory, out_filename)
+label_key_full_path = os.path.join(directory, label_key_file)
 
 def get_label_map():
-	label_key_file = "label_key.txt"
-	f = open(label_key_file, 'r')
 	label_map = {}
+	f = open(label_key_full_path, 'r')
 	for line in f:
 		vals = line.strip().split()
 		word_label = vals[0]
 		int_label=  vals[1]
 		label_map[word_label] = int_label
+	f.close()
 	return label_map
 
 # Returns a list of full directory paths in current directory.

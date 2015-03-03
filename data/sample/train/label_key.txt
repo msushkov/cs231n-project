@@ -1,0 +1,5 @@
+bicycle 0
+harp 1
+persian 2
+skateboard 3
+soccerball 4

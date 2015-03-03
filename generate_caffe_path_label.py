@@ -6,12 +6,17 @@
 import os
 import os.path
 
-directory = "data/sample"
+###
+# USER_DEFINED VARIABLES
+###
 
-os.chdir(directory)
-
+DIR = "data/sample"
 out_filename = "caffe_labels_sample.txt"
-cwd = os.getcwd()
+
+###############
+
+directory = os.path.join(os.getcwd(), DIR)
+out_file_full_path = os.path.join(directory, out_filename)
 
 def get_label_map():
 	label_key_file = "label_key.txt"
@@ -24,20 +29,19 @@ def get_label_map():
 		label_map[word_label] = int_label
 	return label_map
 
-# Returns a list of absolute directory paths in current directory.
-def get_dirs_in_curr():
-	return [os.path.join(cwd, name) for name in os.listdir(cwd) if os.path.isdir(os.path.join(cwd, name))]
+# Returns a list of full directory paths in current directory.
+def get_dirs_in_curr(curr_dir):
+	return [os.path.join(curr_dir, name) for name in os.listdir(curr_dir) if os.path.isdir(os.path.join(curr_dir, name))]
 
 # Returns a list of image filenames (with full path) in the directory dir_path.
 def get_image_filenames(dir_path):
-	return [os.path.join(cwd, o) for o in os.listdir(dir_path) \
-		if os.path.join(cwd,o).lower().endswith(".jpeg") or os.path.join(cwd,o).lower().endswith(".jpg")]
+	return [os.path.join(dir_path, o) for o in os.listdir(dir_path) if o.lower().endswith(".jpeg") or o.lower().endswith(".jpg")]
 
 
-out = open(out_filename, 'w')
-
+out = open(out_file_full_path, 'w')
 label_map = get_label_map()
-dirs = get_dirs_in_curr()
+dirs = get_dirs_in_curr(directory)
+
 for directory in dirs:
 	curr_name = directory.split('/')[-1]
 	curr_label = label_map[curr_name]

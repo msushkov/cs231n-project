@@ -23,7 +23,7 @@ def load_label_file():
 	image_labels = {}
 	for line in f:
 		vals = line.strip().split()
-		image_filename = vals[0].split('/')[-1]
+		image_filename = vals[0]
 		int_label = vals[1]
 		image_labels[image_filename] = int(int_label)
 	f.close()
@@ -33,7 +33,8 @@ def load_label_file():
 image_labels = load_label_file()
 
 image_filenames = image_labels.keys()
-predictions = net.predict([image_filenames])
+images = [caffe.io.load_image(name) for name in image_filenames]
+predictions = net.predict(images)
 
 errors = {} # filename -> (true label, prediction)
 num_errors = 0

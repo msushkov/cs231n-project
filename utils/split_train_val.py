@@ -14,8 +14,8 @@ from random import shuffle
 
 train_split = 0.7
 
-DIR = "data/sample" # train and val will be in here
-TEMP_DIR = "data/temp"
+DIR = "../data/sample" # train and val will be in here
+TEMP_DIR = "../data/temp"
 
 ##################
 

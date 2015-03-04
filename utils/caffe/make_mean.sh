@@ -3,6 +3,7 @@
 
 # Make sure to run set_env.sh before this.
 
+# these don't need to be changed
 TRAIN_LEVELDB=$TRAIN_DATA_ROOT/train_lmdb
 MEAN_OUTPUT_FILE=$TRAIN_DATA_ROOT/mean.binaryproto
 MEAN_OUTPUT_FILE_NPY=$TRAIN_DATA_ROOT/mean.npy

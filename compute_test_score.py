@@ -44,12 +44,10 @@ for i, filename in enumerate(image_filenames):
 	true_label = image_labels[filename]
 	if true_label != best_prediction:
 		num_errors += 1
-		errors[filename] = (true_label, best_prediction)
+		errors[filename.split('/')[-1]] = (true_label, best_prediction)
 
 num_test = len(image_labels)
 accuracy = 1.0 - float(num_errors) / float(num_test)
 
 print "Number of errors = %d, total # test = %d" % (num_errors, num_test)
 print "Accuracy = %f" % accuracy
-print "\nErrors:"
-print errors

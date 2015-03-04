@@ -5,22 +5,22 @@
 
 # data (necessary if we wish to train a network)
 # (make sure these directories have the file caffe.txt that lists the image locations and labels)
-export TRAIN_DATA_ROOT=/root/cs231n-project/data/sample/train
-export VAL_DATA_ROOT=/root/cs231n-project/data/sample/val
-export TEST_DATA_ROOT=/root/cs231n-project/data/sample/val
+export TRAIN_DATA_ROOT=/path/to/train/
+export VAL_DATA_ROOT=/path/to/val/
+export TEST_DATA_ROOT=/path/to/test
 
 
 # these are necessary only if we are evaluating a trained (or pre-trained) network on some test data
-export MODEL_FILE=/path/to/trained/model/prototxt/file
-export PRETRAINED_NETWORK=/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel
+export MODEL_FILE=/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt
+export PRETRAINED_NETWORK=/path/to/pretrained/network/caffemodel/file
 
 # mean (set these after running make_mean.sh)
-export MEAN_FILE_BINARYPROTO=/root/caffe/data/ilsvrc12/imagenet_mean.binaryproto
-export MEAN_FILE_NPY=/root/caffe/data/ilsvrc12/imagenet_mean.npy
+export MEAN_FILE_BINARYPROTO=/path/to/mean/binaryproto
+export MEAN_FILE_NPY=/path/to/mean/npy
 
 
 # these probably won't change
-export CAFFE_ROOT=/root/caffe
+export CAFFE_ROOT=/home/caffe
 export LABEL_FILENAME=caffe.txt
 export LABEL_KEY=label_key.txt
 

@@ -13,7 +13,6 @@ MODEL_FILE = os.environ['MODEL_FILE']
 PRETRAINED = os.environ['PRETRAINED_NETWORK']
 MEAN_FILE = os.environ['MEAN_FILE_NPY']
 GROUND_TRUTH_LABEL_FILE = os.environ['TEST_LABELS']
-IMAGE_SIZE = os.environ['IMAGE_SIZE']
 
 caffe.set_mode_gpu()
 net = caffe.Classifier(MODEL_FILE, PRETRAINED, mean=np.load(MEAN_FILE).mean(1).mean(1), channel_swap=(2, 1, 0), raw_scale=255)

@@ -11,7 +11,7 @@ import numpy as np
 
 if len(sys.argv) != 3:
 	print "Usage: python convert_binaryproto_to_npy.py file.binaryproto out.npy"
-sys.exit()
+    sys.exit()
 
 blob = caffe.proto.caffe_pb2.BlobProto()
 data = open(sys.argv[1], 'rb').read()

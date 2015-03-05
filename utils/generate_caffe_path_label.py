@@ -11,7 +11,7 @@ import os.path
 ###
 
 # for which directory do we want to generate the caffe.txt file?
-DIR = "../data/sample/train"
+DIR = "../data/sample/gold"
 
 ###############
 

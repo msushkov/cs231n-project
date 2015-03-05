@@ -7,7 +7,7 @@
 # (make sure these directories have the file caffe.txt that lists the image locations and labels)
 export TRAIN_DATA_ROOT=/root/cs231n-project/data/sample/train
 export VAL_DATA_ROOT=/root/cs231n-project/data/sample/val
-export TEST_DATA_ROOT=/root/cs231n-project/data/sample/val
+export TEST_DATA_ROOT=/root/cs231n-project/data/sample/test
 
 
 # these are necessary only if we are evaluating a trained (or pre-trained) network on some test data

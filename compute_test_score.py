@@ -8,6 +8,7 @@ sys.path.insert(0, caffe_root + 'python')
 
 import caffe
 import numpy as np
+from collections import Counter
 
 MODEL_FILE = os.environ['MODEL_FILE']
 PRETRAINED = os.environ['PRETRAINED_NETWORK']
@@ -36,18 +37,18 @@ image_filenames = image_labels.keys()
 images = [caffe.io.load_image(name) for name in image_filenames]
 predictions = net.predict(images)
 
-errors = {} # filename -> (true label, prediction)
-num_errors = 0
+# record errors by class label
+errors = Counter()
+totals = Counter()
 for i, filename in enumerate(image_filenames):
 	curr_predictions = predictions[i]
 	best_prediction = curr_predictions.argmax()
 	true_label = image_labels[filename]
+	totals[true_label] += 1
 	if true_label != best_prediction:
-		num_errors += 1
-		errors[filename.split('/')[-1]] = (true_label, best_prediction)
+		errors[true_label] += 1
 
-num_test = len(image_labels)
-accuracy = 1.0 - float(num_errors) / float(num_test)
-
-print "Number of errors = %d, total # test = %d" % (num_errors, num_test)
-print "Accuracy = %f" % accuracy
+print "Accuracy: "
+for true_class in errors:
+	accuracy = 1.0 - float(errors[true_label]) / float(totals[true_label])
+	print "True label %s; accuracy = %f" % (true_label, accuracy)

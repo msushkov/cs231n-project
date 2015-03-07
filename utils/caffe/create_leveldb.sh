@@ -4,6 +4,10 @@
 
 TOOLS=$CAFFE_ROOT/build/tools
 
+# delete val_lmdb and train_lmdb to avoid errors
+rm -rf $TRAIN_DATA_ROOT/train_lmdb
+rm -rf $VAL_DATA_ROOT/val_lmdb
+
 # Set RESIZE=true to resize the images to 256x256. Leave as false if images have
 # already been resized using another tool.
 RESIZE=true

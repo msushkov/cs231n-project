@@ -52,6 +52,9 @@ for directory in dirs:
 
 	image_filenames = get_image_filenames(directory)
 	for name in image_filenames:
-		out.write(name + " " + curr_label + "\n")
+		# record only classname/filename.jpg, not the full path
+		vals = name.split('/')
+		fname = os.path.join(vals[-2], vals[-1])
+		out.write(fname + " " + curr_label + "\n")
 
 out.close()

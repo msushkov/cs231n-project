@@ -6,6 +6,6 @@ dir=$(pwd)
 
 cd $CAFFE_ROOT
 
-./build/tools/caffe train -solver solver.prototxt -weights $REFERENCE_MODEL -gpu 0
+./build/tools/caffe train -solver $dir/solver.prototxt -weights $REFERENCE_MODEL -gpu 0
 
-cd dir
+cd $dir

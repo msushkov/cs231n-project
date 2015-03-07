@@ -35,7 +35,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
-    $TRAIN_DATA_ROOT \
+    $TRAIN_DATA_ROOT/ \
     $TRAIN_DATA_ROOT/caffe.txt \
     $TRAIN_DATA_ROOT/train_lmdb
 
@@ -45,7 +45,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
-    $VAL_DATA_ROOT \
+    $VAL_DATA_ROOT/ \
     $VAL_DATA_ROOT/caffe.txt \
     $VAL_DATA_ROOT/val_lmdb
 

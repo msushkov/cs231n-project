@@ -22,7 +22,7 @@ export SYNSET_WORDS=/root/caffe/data/ilsvrc12/synset_words.txt
 
 
 # these probably won't change
-export CAFFE_ROOT=/home/caffe
+export CAFFE_ROOT=/root/caffe
 export LABEL_FILENAME=caffe.txt
 export LABEL_KEY=label_key.txt
 

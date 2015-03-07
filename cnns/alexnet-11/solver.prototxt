@@ -11,4 +11,4 @@ momentum: 0.9
 weight_decay: 0.0005
 snapshot: 10000
 snapshot_prefix: "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11"
-solver_type: "ADAGRAD"
+solver_type: ADAGRAD

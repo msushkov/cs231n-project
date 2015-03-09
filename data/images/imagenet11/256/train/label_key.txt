@@ -1,0 +1,11 @@
+bicycle 0
+broccoli 1
+christmasstocking 2
+harp 3
+paintballmarker 4
+persiancat 5
+sewingmachine 6
+skateboard 7
+soccerball 8
+tennisball 9
+trash 10

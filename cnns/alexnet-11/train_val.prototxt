@@ -21,7 +21,7 @@ layer {
 #    mirror: true
 #  }
   data_param {
-    source: "/root/cs231n-project/data/sample/train/train_lmdb"
+    source: "/root/cs231n-project/data/images/imagenet11/256/train/train_lmdb"
     batch_size: 256
     backend: LMDB
   }
@@ -48,7 +48,7 @@ layer {
 #    mirror: true
 #  }
   data_param {
-    source: "/root/cs231n-project/data/sample/val/val_lmdb"
+    source: "/root/cs231n-project/data/images/imagenet11/256/val/val_lmdb"
     batch_size: 50
     backend: LMDB
   }

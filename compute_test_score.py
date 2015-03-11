@@ -117,7 +117,7 @@ c = 0
 n = len(filename_chunks)
 
 # Get the predictions for each chunk
-for curr_filenames in filename_chunks[:1]:
+for curr_filenames in filename_chunks:
 	print "Chunk %d out of %d" % (c, n)
 	c += 1
 

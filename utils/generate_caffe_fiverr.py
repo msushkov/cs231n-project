@@ -44,7 +44,7 @@ def get_labels_fiverr():
 	f = open(labels_file, 'r')
 	for line in f:
 		vals = line.strip().split('-')
-		fname = vals[0].strip()
+		fname = vals[0].strip().lower()
 		yes_or_no = vals[-1].strip().lower()
 		labels[fname] = yes_or_no
 	return labels
@@ -72,7 +72,7 @@ for directory in dirs:
 	for name in image_filenames:
 		# record only classname/filename.jpg, not the full path
 		vals = name.split('/')
-		fname = vals[-1] # filename.jpg
+		fname = vals[-1].lower() # filename.jpg
 		fname_and_dir = os.path.join(vals[-2], vals[-1]) # class/filename.jpg
 
 		yes_or_no = fiverr_labels[fname]

@@ -1,0 +1,6 @@
+bicycle 0
+christmasstocking 2
+harp 3
+persiancat 5
+soccerball 8
+trash 10

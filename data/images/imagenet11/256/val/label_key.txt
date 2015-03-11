@@ -1,2 +1,0 @@
-bicycle 0
-trash 10

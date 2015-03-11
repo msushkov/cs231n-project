@@ -1,5 +1,7 @@
 # Computes the score for the test directory
 
+# Runs on out of the box AlexNet.
+
 import sys
 import os
 
@@ -10,35 +12,14 @@ import caffe
 import numpy as np
 from collections import Counter
 
-# are we testing on the out-of-the-box AlexNet that outputs a 1000-d vector?
-# (if we are, then the label indices will be messed up so need to account for that)
-ALEXNET_1000 = False
-
-PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
-MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
+MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
+MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
 GROUND_TRUTH_LABEL_FILE = "/root/cs231n-project/data/images/val/instagram/227/caffe.txt"
-
-# alexnet predicted index -> our label index
-alexnet_labels = {
-	444 : 0, # bicycle
-	406 : 2, # christmasstocking
-	594 : 3, # harp
-	283 : 5, # persiancat
-	806 : 8  # soccerball
-}
 
 K = 1 # take the top k when computing score
 
-if ALEXNET_1000:
-	K = 20
-	PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
-	MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
-	MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
-	GROUND_TRUTH_LABEL_FILE = "/root/cs231n-project/data/images/val/instagram/227/caffe.txt"
-
 TRASH = 10 # label for trash class
-
 
 caffe.set_mode_gpu()
 net = caffe.Classifier(MODEL_FILE, PRETRAINED, mean=np.load(MEAN_FILE).mean(1).mean(1), channel_swap=(2, 1, 0), raw_scale=255)
@@ -84,16 +65,6 @@ for i, filename in enumerate(image_filenames):
 	top_k = sorted_predictions[:K]
 
 	top_k_labels = set([index for (pred, index) in top_k])
-
-	# as far as we are concerned, AlexNet will predict one of our 5 classes, or trash
-	if ALEXNET_1000:
-		new_labels = set()
-		for label in top_k_labels:
-			if label in alexnet_labels:
-				new_labels.add(alexnet_labels[label])
-			else:
-				new_labels.add(TRASH)
-		top_k_labels = new_labels
 
 	true_label = image_labels[filename]
 

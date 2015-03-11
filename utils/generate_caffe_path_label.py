@@ -1,4 +1,4 @@
-# Generates a single file containing image filenames and their labels.
+# Generates a single file containing image filenames and their labels (caffe.txt).
 
 # NOTE: must be executed from the directory from where this file lives.
 # Run this on the machine where the training will take place.
@@ -11,7 +11,7 @@ import os.path
 ###
 
 # for which directory do we want to generate the caffe.txt file?
-DIR = "../data/sample/gold"
+DIR = "../data/images/train/no_augmentations/imagenet/256"
 
 ###############
 

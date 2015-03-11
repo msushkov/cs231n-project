@@ -15,7 +15,7 @@ CHUNK_SIZE = 200
 
 # are we testing on the out-of-the-box AlexNet that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
-ALEXNET_1000 = False
+ALEXNET_1000 = True
 
 PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
 MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
@@ -164,14 +164,14 @@ for curr_filenames in filename_chunks:
 				fp[class_label] += 1
 			else:
 				# fiverr guy correctly labeled it as the class that it is
-				assert fiverr_label == class_label
+				assert fiverr_label == class_label, "Fiverr label = %s, class label = %s" % (fiverr_label, class_label)
 				tp[class_label] += 1
 		elif TRASH in top_k_labels:
 			if fiverr_label == class_label:
 				fn[class_label] += 1
 			else:
 				# fiverr guy correctly labeled it as trash
-				assert fiverr_label == TRASH
+				assert fiverr_label == TRASH, "Fiverr label = %s" % fiverr_label
 				tn[class_label] += 1
 		else:
 			fn[class_label] += 1

@@ -88,9 +88,12 @@ fn = Counter()
 tp = Counter()
 tn = Counter()
 
-
+c = 0
 # Get the predictions for each chunk
 for curr_filenames in filename_chunks:
+	print "Chunk %d" % c
+	c += 1
+	
 	images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in curr_filenames]
 	predictions = net.predict(images)
 

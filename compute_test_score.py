@@ -20,9 +20,10 @@ ALEXNET_1000 = False
 
 # model 2
 # PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
+# MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
 
-PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3/cnn3_iter_2000.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
+PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3_iter_2000.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/cnn3/deploy.prototxt"
 MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
 

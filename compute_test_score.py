@@ -60,7 +60,8 @@ label_key = {
 	"sewingmachine" : 6,
 	"skateboard" : 7,
 	"soccerball" : 8,
-	"tennisball" : 9
+	"tennisball" : 9,
+	"trash" : 10
 }
 
 key_label = {}

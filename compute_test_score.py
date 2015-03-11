@@ -10,6 +10,9 @@ import caffe
 import numpy as np
 from collections import Counter
 
+# feed chunks of this size into the cnn at a time to compute scores for all of them
+CHUNK_SIZE = 500
+
 # are we testing on the out-of-the-box AlexNet that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
 ALEXNET_1000 = False
@@ -42,6 +45,12 @@ if ALEXNET_1000:
 TRASH = 10 # label for trash class
 
 
+# Returns a list of chunks of size n, made from l.
+def chunks(l, n):
+    n = max(1, n)
+    return [l[i:i + n] for i in range(0, len(l), n)]
+
+
 caffe.set_mode_gpu()
 net = caffe.Classifier(MODEL_FILE, PRETRAINED, mean=np.load(MEAN_FILE).mean(1).mean(1), channel_swap=(2, 1, 0), raw_scale=255)
 
@@ -60,66 +69,93 @@ def load_label_file():
 # mapping of filename -> ground truth label
 image_labels = load_label_file()
 
+# a set of all possible correct labels
+gold_labels = set(image_labels.values())
+
+# chunk the filenames of all the images we want to test
 image_filenames = image_labels.keys()
-images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in image_filenames]
-predictions = net.predict(images)
+filename_chunks = chunks(image_filenames, CHUNK_SIZE)
 
 # record errors by class label
 # assume working with an image whose true label number is x (trash is 10)
 # fp: if prediction on image is x and true label is 10
 # tp: if prediction on image is x and true label is x
 # fn: if prediction on image is 10 and true label is x
-# tn: if prediction on image is 10 and true label is 10 
+# tn: if prediction on image is 10 and true label is 10
 
-fp = {}
-fn = {}
-tp = {}
-tn = {}
+fp = Counter()
+fn = Counter()
+tp = Counter()
+tn = Counter()
 
-for i, filename in enumerate(image_filenames):
-	curr_predictions = predictions[i]
 
-	idx = [i for i in xrange(len(curr_predictions))]
-	preds = zip(curr_predictions, idx) # gives list of tuples (pred, index)
+# Get the predictions for each chunk
+for curr_filenames in filename_chunks:
+	images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in curr_filenames]
+	predictions = net.predict(images)
 
-	sorted_predictions = sorted(preds, reverse=True)
-	top_k = sorted_predictions[:K]
+	for i, filename in enumerate(curr_filenames):
+		curr_predictions = predictions[i]
 
-	top_k_labels = set([index for (pred, index) in top_k])
+		idx = [i for i in xrange(len(curr_predictions))]
+		preds = zip(curr_predictions, idx) # gives list of tuples (pred, index)
 
-	# as far as we are concerned, AlexNet will predict one of our 5 classes, or trash
-	if ALEXNET_1000:
-		new_labels = set()
-		for label in top_k_labels:
-			if label in alexnet_labels:
-				new_labels.add(alexnet_labels[label])
+		sorted_predictions = sorted(preds, reverse=True)
+		top_k = sorted_predictions[:K]
+
+		top_k_labels = set([index for (pred, index) in top_k])
+
+		# as far as we are concerned, AlexNet will predict one of our 5 classes, or trash
+		if ALEXNET_1000:
+			new_labels = set()
+			for label in top_k_labels:
+				if label in alexnet_labels:
+					new_labels.add(alexnet_labels[label])
+				else:
+					new_labels.add(TRASH)
+			top_k_labels = new_labels
+
+		true_label = image_labels[filename]
+
+		# if cnn predicted trash as one of the top labels
+		if TRASH in top_k_labels:
+			if true_label == TRASH:
+				tn[true_label] += 1
 			else:
-				new_labels.add(TRASH)
-		top_k_labels = new_labels
-
-	true_label = image_labels[filename]
-
-	# if cnn predicted trash as one of the top labels
-	if TRASH in tok_k_labels:
-		if true_label == TRASH:
-			tn[true_label] += 1
+				fn[true_label] += 1
 		else:
-			fn[true_label] += 1
-	else:
-		if true_label in top_k_labels:
-			tp[true_label] += 1
-		else:
-			fp[true_label] += 1
+			if true_label in top_k_labels:
+				tp[true_label] += 1
+			else:
+				fp[true_label] += 1
+
 
 print "Scores: "
-for true_class in tp:
-	tp = tp[true_class]
-	fp = fp[true_class]
-	tn = tn[true_class]
-	fn = fn[true_class]
+total_num = 0
+for true_class in gold_labels:
+	tp_val = tp[true_class]
+	fp_val = fp[true_class]
+	tn_val = tn[true_class]
+	fn_val = fn[true_class]
 
-	accuracy = float(tp + tn) / (tp + fp + tn + fn)
-	precision = float(tp) / (tp + fp)
-	recall = float(tp) / (tp + fn)
+	total = tp_val + fp_val + tn_val + fn_val
+	total_num += total
 
-	print "  True label %s: accuracy = %f; precision = %f; recall = %f" % (true_label, accuracy, precision, recall)
+	if total == 0:
+		print "  True label %s -> # test points = %d" (true_class, total)
+	else:
+		accuracy = float(tp_val + tn_val) / (tp_val + fp_val + tn_val + fn_val)
+		
+		precision = -1.0
+		if tp_val + fp_val > 0:
+			precision = float(tp_val) / (tp_val + fp_val)
+		
+		recall = -1.0
+		if tp_val + fn_val > 0:
+			recall = float(tp_val) / (tp_val + fn_val)
+
+		print "  True label %s -> # test points = %d, acc = %f; prec = %f; recall = %f" % \
+			(true_class, total, accuracy, precision, recall)
+
+print "Total # of test points = %d" % total_num
+

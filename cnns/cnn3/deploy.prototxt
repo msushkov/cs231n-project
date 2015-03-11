@@ -1,4 +1,4 @@
-name: "alexnet11"
+name: "cnn3"
 input: "data"
 input_dim: 10
 input_dim: 3
@@ -196,17 +196,17 @@ layer {
   }
 }
 layer {
-  name: "fc8-alexnet11"
+  name: "fc8"
   type: "InnerProduct"
   bottom: "fc7"
-  top: "fc8-alexnet11"
+  top: "fc8"
   inner_product_param {
-    num_output: 11
+    num_output: 1000
   }
 }
 layer {
   name: "prob"
   type: "Softmax"
-  bottom: "fc8-alexnet11"
+  bottom: "fc8"
   top: "prob"
 }

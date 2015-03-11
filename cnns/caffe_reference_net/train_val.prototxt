@@ -1,4 +1,4 @@
-name: "CaffeNet"
+name: "alexnet11"
 layer {
   name: "data"
   type: "Data"

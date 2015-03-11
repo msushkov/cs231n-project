@@ -8,8 +8,13 @@ TRAIN_LEVELDB=$TRAIN_DATA_ROOT/train_lmdb
 MEAN_OUTPUT_FILE=$TRAIN_DATA_ROOT/mean.binaryproto
 MEAN_OUTPUT_FILE_NPY=$TRAIN_DATA_ROOT/mean.npy
 
-.$CAFFE_ROOT/build/tools/compute_image_mean $TRAIN_LEVELDB $MEAN_OUTPUT_FILE
+dir=$(pwd)
+cd $CAFFE_ROOT
+
+./build/tools/compute_image_mean $TRAIN_LEVELDB $MEAN_OUTPUT_FILE
 
 python convert_binaryproto_to_npy.py $MEAN_OUTPUT_FILE $MEAN_OUTPUT_FILE_NPY
+
+cd $dir
 
 echo "Done."

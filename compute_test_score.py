@@ -87,7 +87,7 @@ def load_label_file():
 
 # Get the class label from the filename (e.g. bike_001.jpg --> bike)
 def get_class_label(filename):
-	class_name = filename.split('/')[-2]
+	class_name = filename.split('/')[-2].split('_', 1)[0]
 	return label_key[class_name]
 
 # mapping of filename -> ground truth label

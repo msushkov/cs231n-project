@@ -62,6 +62,8 @@ key_label = {}
 for key in label_key:
 	key_label[label_key[key]] = key
 
+label_indices_set = set(key_label.keys())
+
 # Returns a list of chunks of size n, made from l.
 def chunks(l, n):
     n = max(1, n)
@@ -85,7 +87,8 @@ def load_label_file():
 
 # Get the class label from the filename (e.g. bike_001.jpg --> bike)
 def get_class_label(filename):
-	return filename.split('/')[-1].split('_', 1)[0]
+	class_name = filename.split('/')[-1].split('_', 1)[0]
+	return label_key[class_name]
 
 # mapping of filename -> ground truth label
 image_labels = load_label_file()
@@ -124,6 +127,11 @@ for curr_filenames in filename_chunks[:1]:
 	for i, filename in enumerate(curr_filenames):
 		curr_predictions = predictions[i]
 
+		if ALEXNET_1000:
+			assert len(curr_predictions) == 1000
+		else:
+			assert len(curr_predictions) == 11
+
 		idx = [i for i in xrange(len(curr_predictions))]
 		preds = zip(curr_predictions, idx) # gives list of tuples (pred, index)
 
@@ -148,7 +156,7 @@ for curr_filenames in filename_chunks[:1]:
 		# assume working with an image whose class label number is x (trash is 10)
 		# fp: if prediction on image is x and fiverr label is 10
 		# tp: if prediction on image is x and fiverr label is x
-		# fn: if prediction on image is 10 and fiverr label is x
+		# fn: if prediction on image is 10 or y != x and fiverr label is x
 		# tn: if prediction on image is 10 and fiverr label is 10
 
 		if class_label in top_k_labels:
@@ -166,7 +174,7 @@ for curr_filenames in filename_chunks[:1]:
 				assert fiverr_label == TRASH
 				tn[class_label] += 1
 		else:
-			assert False, "ERROR"
+			fn[class_label] += 1
 
 
 print "Scores: "

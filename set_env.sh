@@ -5,9 +5,9 @@
 
 # data (necessary if we wish to train a network)
 # (make sure these directories have the file caffe.txt that lists the image locations and labels)
-export TRAIN_DATA_ROOT=/root/cs231n-project/data/images/train/caffe_augmentations/imagenet/256
-export VAL_DATA_ROOT=/root/cs231n-project/data/images/val/instagram/256
-export TEST_DATA_ROOT=/root/cs231n-project/data/images/val/instagram/256
+export TRAIN_DATA_ROOT=/root/cs231n-project/data/images/train/no_augmentations/imagenet/256
+export VAL_DATA_ROOT=/root/cs231n-project/data/images/val/instagram/227
+export TEST_DATA_ROOT=/root/cs231n-project/data/images/val/instagram/227
 
 
 # these are necessary only if we are evaluating a trained (or pre-trained) network on some test data

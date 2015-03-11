@@ -199,7 +199,7 @@ layer {
   name: "fc8-alexnet11"
   type: "InnerProduct"
   bottom: "fc7"
-  top: "fc8"
+  top: "fc8-alexnet11"
   inner_product_param {
     num_output: 11
   }

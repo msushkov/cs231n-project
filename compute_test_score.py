@@ -19,14 +19,14 @@ CHUNK_SIZE = 200
 ALEXNET_1000 = False
 
 # model 2
-# PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
-# MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
-# MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
+MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # model 3
-PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3_iter_2000.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/cnn3/deploy.prototxt"
-MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
+#PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3_iter_2000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/cnn3/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
 GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
 
 GROUND_TRUTH_LABEL_FILE = os.path.join(GROUND_TRUTH_DIR, "caffe.txt")
@@ -40,7 +40,7 @@ alexnet_labels = {
 	806 : 8  # soccerball
 }
 
-K = 1 # take the top k when computing score
+K = 2 # take the top k when computing score
 
 if ALEXNET_1000:
 	K = 20
@@ -177,9 +177,9 @@ for curr_filenames in filename_chunks:
 				fp[class_label] += 1
 
 				if num_examples_to_show_fp > 0:
-					class_label_word = key_label[class_label]
+					fiverr_label_word = key_label[fiverr_label]
 					guesses = [key_label[label] for label in top_k_labels]
-					examples[filename] = ("FP", class_label_word, guesses)
+					examples[filename] = ("FP", fiverr_label_word, guesses)
 					num_examples_to_show_fp -= 1
 			else:
 				# fiverr guy correctly labeled it as the class that it is
@@ -190,9 +190,9 @@ for curr_filenames in filename_chunks:
 				fn[class_label] += 1
 
 				if num_examples_to_show_fn > 0:
-					class_label_word = key_label[class_label]
+					fiverr_label_word = key_label[fiverr_label]
 					guesses = [key_label[label] for label in top_k_labels]
-					examples[filename] = ("FN", class_label_word, guesses)
+					examples[filename] = ("FN", fiverr_label_word, guesses)
 					num_examples_to_show_fn -= 1
 			else:
 				# fiverr guy correctly labeled it as trash

@@ -53,7 +53,8 @@ layer {
   convolution_param {
     num_output: 64
     kernel_size: 7
-    stride: 4
+    stride: 3
+    pad: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -105,9 +106,7 @@ layer {
   }
   convolution_param {
     num_output: 256
-    pad: 2
     kernel_size: 5
-    group: 2
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -145,9 +144,49 @@ layer {
   }
 }
 layer {
+  name: "fc3"
+  type: "InnerProduct"
+  bottom: "pool2"
+  top: "fc3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 128
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "fc3"
+  top: "fc3"
+}
+layer {
+  name: "drop3"
+  type: "Dropout"
+  bottom: "fc3"
+  top: "fc3"
+  dropout_param {
+    dropout_ratio: 0.4
+  }
+}
+layer {
   name: "fc4"
   type: "InnerProduct"
-  bottom: "pool3"
+  bottom: "fc3"
   top: "fc4"
   param {
     lr_mult: 1
@@ -158,87 +197,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 4096
-    weight_filler {
-      type: "gaussian"
-      std: 0.005
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
-  }
-}
-layer {
-  name: "relu6"
-  type: "ReLU"
-  bottom: "fc6"
-  top: "fc6"
-}
-layer {
-  name: "drop6"
-  type: "Dropout"
-  bottom: "fc6"
-  top: "fc6"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
-  name: "fc7"
-  type: "InnerProduct"
-  bottom: "fc6"
-  top: "fc7"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 4096
-    weight_filler {
-      type: "gaussian"
-      std: 0.005
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
-  }
-}
-layer {
-  name: "relu7"
-  type: "ReLU"
-  bottom: "fc7"
-  top: "fc7"
-}
-layer {
-  name: "drop7"
-  type: "Dropout"
-  bottom: "fc7"
-  top: "fc7"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
-  name: "fc8"
-  type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 1000
+    num_output: 11
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -252,7 +211,7 @@ layer {
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "fc8"
+  bottom: "fc4"
   bottom: "label"
   top: "accuracy"
   include {
@@ -262,7 +221,7 @@ layer {
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
-  bottom: "fc8"
+  bottom: "fc4"
   bottom: "label"
   top: "loss"
 }

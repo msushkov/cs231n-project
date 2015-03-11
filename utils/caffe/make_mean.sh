@@ -13,8 +13,8 @@ cd $CAFFE_ROOT
 
 ./build/tools/compute_image_mean $TRAIN_LEVELDB $MEAN_OUTPUT_FILE
 
-python convert_binaryproto_to_npy.py $MEAN_OUTPUT_FILE $MEAN_OUTPUT_FILE_NPY
-
 cd $dir
+
+python convert_binaryproto_to_npy.py $MEAN_OUTPUT_FILE $MEAN_OUTPUT_FILE_NPY
 
 echo "Done."

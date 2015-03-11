@@ -11,7 +11,7 @@ import numpy as np
 from collections import Counter
 
 # feed chunks of this size into the cnn at a time to compute scores for all of them
-CHUNK_SIZE = 500
+CHUNK_SIZE = 200
 
 # are we testing on the out-of-the-box AlexNet that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
@@ -45,6 +45,23 @@ if ALEXNET_1000:
 TRASH = 10 # label for trash class
 
 
+label_key = {
+	"bicycle" : 0,
+	"broccoli" : 1,
+	"christmasstocking" : 2,
+	"harp" : 3,
+	"paintballmarker" : 4,
+	"persiancat" : 5,
+	"sewingmachine" : 6,
+	"skateboard" : 7,
+	"soccerball" : 8,
+	"tennisball" : 9
+}
+
+key_label = {}
+for key in label_key:
+	key_label[label_key[key]] = key
+
 # Returns a list of chunks of size n, made from l.
 def chunks(l, n):
     n = max(1, n)
@@ -66,22 +83,27 @@ def load_label_file():
 	f.close()
 	return image_labels
 
+# Get the class label from the filename (e.g. bike_001.jpg --> bike)
+def get_class_label(filename):
+	return filename.split('/')[-1].split('_', 1)[0]
+
 # mapping of filename -> ground truth label
 image_labels = load_label_file()
 
 # a set of all possible correct labels
 gold_labels = set(image_labels.values())
+gold_labels.remove(TRASH)
 
 # chunk the filenames of all the images we want to test
 image_filenames = image_labels.keys()
 filename_chunks = chunks(image_filenames, CHUNK_SIZE)
 
 # record errors by class label
-# assume working with an image whose true label number is x (trash is 10)
-# fp: if prediction on image is x and true label is 10
-# tp: if prediction on image is x and true label is x
-# fn: if prediction on image is 10 and true label is x
-# tn: if prediction on image is 10 and true label is 10
+# assume working with an image whose class label number is x (trash is 10)
+# fp: if prediction on image is x and fiverr label is 10
+# tp: if prediction on image is x and fiverr label is x
+# fn: if prediction on image is 10 and fiverr label is x
+# tn: if prediction on image is 10 and fiverr label is 10
 
 fp = Counter()
 fn = Counter()
@@ -89,11 +111,13 @@ tp = Counter()
 tn = Counter()
 
 c = 0
+n = len(filename_chunks)
+
 # Get the predictions for each chunk
-for curr_filenames in filename_chunks:
-	print "Chunk %d" % c
+for curr_filenames in filename_chunks[:1]:
+	print "Chunk %d out of %d" % (c, n)
 	c += 1
-	
+
 	images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in curr_filenames]
 	predictions = net.predict(images)
 
@@ -118,19 +142,31 @@ for curr_filenames in filename_chunks:
 					new_labels.add(TRASH)
 			top_k_labels = new_labels
 
-		true_label = image_labels[filename]
+		fiverr_label = image_labels[filename]
+		class_label = get_class_label(filename)
 
-		# if cnn predicted trash as one of the top labels
-		if TRASH in top_k_labels:
-			if true_label == TRASH:
-				tn[true_label] += 1
+		# assume working with an image whose class label number is x (trash is 10)
+		# fp: if prediction on image is x and fiverr label is 10
+		# tp: if prediction on image is x and fiverr label is x
+		# fn: if prediction on image is 10 and fiverr label is x
+		# tn: if prediction on image is 10 and fiverr label is 10
+
+		if class_label in top_k_labels:
+			if fiverr_label == TRASH:
+				fp[class_label] += 1
 			else:
-				fn[true_label] += 1
+				# fiverr guy correctly labeled it as the class that it is
+				assert fiverr_label == class_label
+				tp[class_label] += 1
+		elif TRASH in top_k_labels:
+			if fiverr_label == class_label:
+				fn[class_label] += 1
+			else:
+				# fiverr guy correctly labeled it as trash
+				assert fiverr_label == TRASH
+				tn[class_label] += 1
 		else:
-			if true_label in top_k_labels:
-				tp[true_label] += 1
-			else:
-				fp[true_label] += 1
+			assert False, "ERROR"
 
 
 print "Scores: "
@@ -145,7 +181,7 @@ for true_class in gold_labels:
 	total_num += total
 
 	if total == 0:
-		print "  True label %s -> # test points = %d" (true_class, total)
+		print "  True label %s -> # test points = %d" (key_label[true_class], total)
 	else:
 		accuracy = float(tp_val + tn_val) / (tp_val + fp_val + tn_val + fn_val)
 		
@@ -158,7 +194,7 @@ for true_class in gold_labels:
 			recall = float(tp_val) / (tp_val + fn_val)
 
 		print "  True label %s -> # test points = %d, acc = %f; prec = %f; recall = %f" % \
-			(true_class, total, accuracy, precision, recall)
+			(key_label[true_class], total, accuracy, precision, recall)
 
 print "Total # of test points = %d" % total_num
 

@@ -17,7 +17,9 @@ ALEXNET_1000 = False
 PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
 MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
 MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
-GROUND_TRUTH_LABEL_FILE = "/root/cs231n-project/data/images/val/instagram/227/caffe.txt"
+GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
+
+GROUND_TRUTH_LABEL_FILE = os.path.join(GROUND_TRUTH_DIR, "caffe.txt")
 
 # alexnet predicted index -> our label index
 alexnet_labels = {
@@ -35,7 +37,7 @@ if ALEXNET_1000:
 	PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
 	MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
 	MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
-	GROUND_TRUTH_LABEL_FILE = "/root/cs231n-project/data/images/val/instagram/227/caffe.txt"
+
 
 TRASH = 10 # label for trash class
 
@@ -59,7 +61,7 @@ def load_label_file():
 image_labels = load_label_file()
 
 image_filenames = image_labels.keys()
-images = [caffe.io.load_image(name) for name in image_filenames]
+images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in image_filenames]
 predictions = net.predict(images)
 
 # record errors by class label

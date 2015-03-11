@@ -47,3 +47,6 @@ iter loss
 3000 0.099
 4000 0.131
 5000 0.161
+
+
+Model 2 snapshot: "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"

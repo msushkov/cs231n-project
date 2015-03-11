@@ -9,15 +9,19 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe
 import numpy as np
 from collections import Counter
+import random
 
 # feed chunks of this size into the cnn at a time to compute scores for all of them
 CHUNK_SIZE = 200
 
 # are we testing on the out-of-the-box AlexNet that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
-ALEXNET_1000 = True
+ALEXNET_1000 = False
 
-PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
+# model 2
+# PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
+
+PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3/cnn3_iter_2000.caffemodel"
 MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
 MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
@@ -116,6 +120,11 @@ tn = Counter()
 c = 0
 n = len(filename_chunks)
 
+# image filename -> ("FP" or "FN", correct class, predicted class)
+examples = {}
+num_examples_to_show_fp = 10
+num_examples_to_show_fn = 10
+
 # Get the predictions for each chunk
 for curr_filenames in filename_chunks:
 	print "Chunk %d out of %d" % (c, n)
@@ -162,6 +171,12 @@ for curr_filenames in filename_chunks:
 		if class_label in top_k_labels:
 			if fiverr_label == TRASH:
 				fp[class_label] += 1
+
+				if num_examples_to_show_fp > 0:
+					class_label_word = key_label[class_label]
+					guesses = [key_label[label] for label in top_k_labels]
+					examples[filename] = ("FP", class_label_word, guesses)
+					num_examples_to_show_fp -= 1
 			else:
 				# fiverr guy correctly labeled it as the class that it is
 				assert fiverr_label == class_label, "Fiverr label = %s, class label = %s" % (fiverr_label, class_label)
@@ -169,6 +184,12 @@ for curr_filenames in filename_chunks:
 		elif TRASH in top_k_labels:
 			if fiverr_label == class_label:
 				fn[class_label] += 1
+
+				if num_examples_to_show_fn > 0:
+					class_label_word = key_label[class_label]
+					guesses = [key_label[label] for label in top_k_labels]
+					examples[filename] = ("FN", class_label_word, guesses)
+					num_examples_to_show_fn -= 1
 			else:
 				# fiverr guy correctly labeled it as trash
 				assert fiverr_label == TRASH, "Fiverr label = %s" % fiverr_label
@@ -204,5 +225,7 @@ for true_class in gold_labels:
 		print "  True label %s -> # test points = %d, acc = %f; prec = %f; recall = %f" % \
 			(key_label[true_class], total, accuracy, precision, recall)
 
-print "Total # of test points = %d" % total_num
+print "Total # of test points = %d \n" % total_num
+
+print examples
 

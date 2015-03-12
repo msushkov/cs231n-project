@@ -18,12 +18,17 @@ CHUNK_SIZE = 200
 # (if we are, then the label indices will be messed up so need to account for that)
 PREDICTING_1000_CLASSES = True
 
-# model 2 - not finetuned CaffeNet
+# model 1 - not finetuned CaffeNet
+#PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
+#MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
+#MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
+
+# model 2 - finetuned CaffeNet
 #PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
-# model 3 - finetuned CaffeNet
+# model 3 - cnn3
 #PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3_iter_2000.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/cnn3/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
@@ -56,13 +61,8 @@ K = 2 # take the top k when computing score
 
 if PREDICTING_1000_CLASSES:
 	K = 20
-	PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
-	MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
-	MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
-
 
 TRASH = 10 # label for trash class
-
 
 label_key = {
 	"bicycle" : 0,

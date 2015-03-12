@@ -1,0 +1,1 @@
+GoogLeNet retrained with a new last layer.

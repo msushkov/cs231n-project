@@ -8,7 +8,7 @@ sys.path.insert(0, caffe_root + 'python')
 
 import caffe
 import numpy as np
-from collections import Counter
+from collections import Counter, defaultdict
 import random
 
 # feed chunks of this size into the cnn at a time to compute scores for all of them
@@ -121,6 +121,9 @@ fn = Counter()
 tp = Counter()
 tn = Counter()
 
+# class_label -> [(filename, class_label_index), ...]
+tp_filenames = defaultdict(list)
+
 c = 0
 n = len(filename_chunks)
 
@@ -151,7 +154,8 @@ for curr_filenames in filename_chunks:
 		sorted_predictions = sorted(preds, reverse=True)
 		top_k = sorted_predictions[:K]
 
-		top_k_labels = set([index for (pred, index) in top_k])
+		top_k_labels_lst = [index for (pred, index) in top_k]
+		top_k_labels = set(top_k_labels_lst)
 
 		# as far as we are concerned, AlexNet will predict one of our 5 classes, or trash
 		if ALEXNET_1000:
@@ -185,6 +189,7 @@ for curr_filenames in filename_chunks:
 				# fiverr guy correctly labeled it as the class that it is
 				assert fiverr_label == class_label, "Fiverr label = %s, class label = %s" % (fiverr_label, class_label)
 				tp[class_label] += 1
+				tp_filenames[class_label].append((filename, top_k_labels_lst.index(class_label)))
 		elif TRASH in top_k_labels:
 			if fiverr_label == class_label:
 				fn[class_label] += 1
@@ -232,4 +237,11 @@ for true_class in gold_labels:
 print "Total # of test points = %d \n" % total_num
 
 print examples
+
+out_file = open('classlabel_tp.txt', 'w')
+for key in key_label:
+	for line in tp_filenames[key]:
+		out_file.write(line + "\n")
+out_file.close()
+
 

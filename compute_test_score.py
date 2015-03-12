@@ -167,17 +167,18 @@ for curr_filenames in filename_chunks:
 		top_k = sorted_predictions[:K]
 
 		top_k_labels_lst = [index for (pred, index) in top_k]
-		top_k_labels = set(top_k_labels_lst)
 
 		# as far as we are concerned, AlexNet will predict one of our 5 classes, or trash
 		if PREDICTING_1000_CLASSES:
 			new_labels = set()
-			for label in top_k_labels:
+			for label in top_k_labels_lst:
 				if label in alexnet_labels:
 					new_labels.add(alexnet_labels[label])
 				else:
 					new_labels.add(TRASH)
-			top_k_labels = new_labels
+			top_k_labels_lst = list(new_labels)
+
+		top_k_labels = set(top_k_labels_lst)
 
 		fiverr_label = image_labels[filename]
 		class_label = get_class_label(filename)
@@ -201,7 +202,9 @@ for curr_filenames in filename_chunks:
 				# fiverr guy correctly labeled it as the class that it is
 				assert fiverr_label == class_label, "Fiverr label = %s, class label = %s" % (fiverr_label, class_label)
 				tp[class_label] += 1
-				tp_filenames[class_label].append((filename, top_k_labels_lst.index(class_label)))
+
+				index_of_class_label = top_k_labels_lst.index(class_label)
+				tp_filenames[class_label].append((filename, index_of_class_label))
 		elif TRASH in top_k_labels:
 			if fiverr_label == class_label:
 				fn[class_label] += 1

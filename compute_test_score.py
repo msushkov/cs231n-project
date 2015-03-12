@@ -18,15 +18,19 @@ CHUNK_SIZE = 200
 # (if we are, then the label indices will be messed up so need to account for that)
 ALEXNET_1000 = False
 
-# model 2
+# model 2 - not finetuned CaffeNet
 PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
 MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
 MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
-# model 3
+# model 3 - finetuned CaffeNet
 #PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3_iter_2000.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/cnn3/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
+
+# GoogleNet - not finetuned
+PRETRAINED = "/root/cs231n-project/cnns/googlenet/reference_model/bvlc_googlenet.caffemodel"
+
 GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
 
 GROUND_TRUTH_LABEL_FILE = os.path.join(GROUND_TRUTH_DIR, "caffe.txt")

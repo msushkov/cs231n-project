@@ -1,38 +1,8 @@
 name: "nin_imagenet"
-layers {
-  top: "data"
-  top: "label"
-  name: "data"
-  type: DATA
-  data_param {
-    source: "/home/linmin/IMAGENET-LMDB/imagenet-train-lmdb"
-    backend: LMDB
-    batch_size: 64
-  }
-  transform_param {
-    crop_size: 224
-    mirror: true
-    mean_file: "/home/linmin/IMAGENET-LMDB/imagenet-train-mean"
-  }
-  include: { phase: TRAIN }
-}
-layers {
-  top: "data"
-  top: "label"
-  name: "data"
-  type: DATA
-  data_param {
-    source: "/home/linmin/IMAGENET-LMDB/imagenet-val-lmdb"
-    backend: LMDB
-    batch_size: 89
-  }
-  transform_param {
-    crop_size: 224
-    mirror: false
-    mean_file: "/home/linmin/IMAGENET-LMDB/imagenet-train-mean"
-  }
-  include: { phase: TEST }
-}
+input_dim: 10
+input_dim: 3
+input_dim: 224
+input_dim: 224
 layers {
   bottom: "data"
   top: "conv1"
@@ -449,18 +419,9 @@ layers {
     stride: 1
   }
 }
-layers {
-  name: "accuracy"
-  type: ACCURACY
+layer {
+  name: "prob"
+  type: "Softmax"
   bottom: "pool4"
-  bottom: "label"
-  top: "accuracy"
-  include: { phase: TEST }
-}
-layers {
-  bottom: "pool4"
-  bottom: "label"
-  name: "loss"
-  type: SOFTMAX_LOSS
-  include: { phase: TRAIN }
+  top: "prob"
 }

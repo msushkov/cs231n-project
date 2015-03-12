@@ -14,14 +14,14 @@ import random
 # feed chunks of this size into the cnn at a time to compute scores for all of them
 CHUNK_SIZE = 200
 
-# are we testing on the out-of-the-box AlexNet that outputs a 1000-d vector?
+# are we testing on the out-of-the-box AlexNet/GoogLeNet/NIN that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
-ALEXNET_1000 = False
+PREDICTING_1000_CLASSES = True
 
 # model 2 - not finetuned CaffeNet
-PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
-MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+#PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # model 3 - finetuned CaffeNet
 #PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3_iter_2000.caffemodel"
@@ -30,6 +30,14 @@ MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # GoogleNet - not finetuned
 PRETRAINED = "/root/cs231n-project/cnns/googlenet/reference_model/bvlc_googlenet.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/googlenet/reference_model/deploy.prototxt"
+MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# NIN - not finetuned
+#PRETRAINED = "/root/cs231n-project/cnns/nin/reference_model/nin_imagenet.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/nin/reference_model/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
 
 GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
 
@@ -46,7 +54,7 @@ alexnet_labels = {
 
 K = 2 # take the top k when computing score
 
-if ALEXNET_1000:
+if PREDICTING_1000_CLASSES:
 	K = 20
 	PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
 	MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
@@ -147,7 +155,7 @@ for curr_filenames in filename_chunks:
 	for i, filename in enumerate(curr_filenames):
 		curr_predictions = predictions[i]
 
-		if ALEXNET_1000:
+		if PREDICTING_1000_CLASSES:
 			assert len(curr_predictions) == 1000
 		else:
 			assert len(curr_predictions) == 11
@@ -162,7 +170,7 @@ for curr_filenames in filename_chunks:
 		top_k_labels = set(top_k_labels_lst)
 
 		# as far as we are concerned, AlexNet will predict one of our 5 classes, or trash
-		if ALEXNET_1000:
+		if PREDICTING_1000_CLASSES:
 			new_labels = set()
 			for label in top_k_labels:
 				if label in alexnet_labels:

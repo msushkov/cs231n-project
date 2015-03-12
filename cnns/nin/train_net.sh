@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-REFERENCE_MODEL=$CAFFE_ROOT/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel
+REFERENCE_MODEL=reference_model/nin_imagenet.caffemodel
 
 dir=$(pwd)
 

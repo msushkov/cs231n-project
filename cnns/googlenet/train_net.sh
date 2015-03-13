@@ -4,7 +4,7 @@ REFERENCE_MODEL=reference_model/bvlc_googlenet.caffemodel
 
 dir=$(pwd)
 
-LOG_FILE=$dir/train_output.txt
+LOG_FILE=$dir/train_output_googlenet.txt
 
 cd $CAFFE_ROOT
 

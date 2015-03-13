@@ -4,7 +4,7 @@ dir=$(pwd)
 
 REFERENCE_MODEL=$dir/reference_model/nin_imagenet.caffemodel
 
-LOG_FILE=$dir/train_output_nin.txt
+LOG_FILE=$dir/train_output.txt
 
 cd $CAFFE_ROOT
 

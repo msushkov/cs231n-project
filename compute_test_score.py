@@ -246,8 +246,8 @@ for true_class in gold_labels:
 		if tp_val + fn_val > 0:
 			recall = float(tp_val) / (tp_val + fn_val)
 
-		print "  True label %s -> # test points = %d, acc = %f; prec = %f; recall = %f" % \
-			(key_label[true_class], total, accuracy, precision, recall)
+		print "  True label %s -> # test points = %d; TP = %d; TN = %d; FP = %d; FN = %d; acc = %f; prec = %f; recall = %f" % \
+			(key_label[true_class], total, tp_val, tn_val, fp_val, fn_val, accuracy, precision, recall)
 
 print "Total # of test points = %d \n" % total_num
 
@@ -256,7 +256,7 @@ print examples
 out_file = open('classlabel_tp.txt', 'w')
 for key in key_label:
 	for line in tp_filenames[key]:
-		out_file.write(line + "\n")
+		out_file.write(str(line) + "\n")
 out_file.close()
 
 

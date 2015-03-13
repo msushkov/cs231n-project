@@ -410,7 +410,7 @@ layers {
 }
 layers {
   bottom: "cccp7"
-  top: "cccp8"
+  top: "cccp8-11"
   name: "cccp8-1024-11"
   type: CONVOLUTION
   blobs_lr: 10

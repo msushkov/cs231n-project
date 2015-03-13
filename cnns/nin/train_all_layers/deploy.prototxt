@@ -1,38 +1,9 @@
-name: "nin_imagenet"
-layers {
-  top: "data"
-  top: "label"
-  name: "data"
-  type: DATA
-  data_param {
-    source: "/root/cs231n-project/data/images/train/no_augmentations/imagenet/256/train_lmdb"
-    backend: LMDB
-    batch_size: 64
-  }
-  transform_param {
-    crop_size: 224
-    mirror: true
-    mean_file: "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.binaryproto"
-  }
-  include: { phase: TRAIN }
-}
-layers {
-  top: "data"
-  top: "label"
-  name: "data"
-  type: DATA
-  data_param {
-    source:  "/root/cs231n-project/data/images/val/instagram/227/val_lmdb"
-    backend: LMDB
-    batch_size: 89
-  }
-  transform_param {
-    crop_size: 224
-    mirror: false
-    mean_file: "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.binaryproto"
-  }
-  include: { phase: TEST }
-}
+name: "nin_imagenet11"
+input: "data"
+input_dim: 10
+input_dim: 3
+input_dim: 224
+input_dim: 224
 layers {
   bottom: "data"
   top: "conv1"
@@ -410,15 +381,15 @@ layers {
 }
 layers {
   bottom: "cccp7"
-  top: "cccp8"
-  name: "cccp8-1024"
+  top: "cccp8-11"
+  name: "cccp8-1024-11"
   type: CONVOLUTION
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 10
+  blobs_lr: 20
+  weight_decay: 10
   weight_decay: 0
   convolution_param {
-    num_output: 1000
+    num_output: 11
     kernel_size: 1
     stride: 1
     weight_filler {
@@ -433,13 +404,13 @@ layers {
   }
 }
 layers {
-  bottom: "cccp8"
-  top: "cccp8"
+  bottom: "cccp8-11"
+  top: "cccp8-11"
   name: "relu12"
   type: RELU
 }
 layers {
-  bottom: "cccp8"
+  bottom: "cccp8-11"
   top: "pool4"
   name: "pool4"
   type: POOLING
@@ -449,18 +420,9 @@ layers {
     stride: 1
   }
 }
-layers {
-  name: "accuracy"
-  type: ACCURACY
+layer {
+  name: "prob"
+  type: "Softmax"
   bottom: "pool4"
-  bottom: "label"
-  top: "accuracy"
-  include: { phase: TEST }
-}
-layers {
-  bottom: "pool4"
-  bottom: "label"
-  name: "loss"
-  type: SOFTMAX_LOSS
-  include: { phase: TRAIN }
+  top: "prob"
 }

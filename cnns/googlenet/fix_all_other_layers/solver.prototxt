@@ -1,4 +1,4 @@
-net: "/root/cs231n-project/cnns/googlenet/train_val.prototxt"
+net: "/root/cs231n-project/cnns/googlenet/fix_all_other_layers/train_val.prototxt"
 test_iter: 96
 test_interval: 500
 test_initialization: false
@@ -11,5 +11,5 @@ max_iter: 2400000
 momentum: 0.9
 weight_decay: 0.0002
 snapshot: 1000
-snapshot_prefix: "/root/cs231n-project/cnns/googlenet/snapshots/googlenet11"
+snapshot_prefix: "/root/cs231n-project/cnns/googlenet/fix_all_other_layers/snapshots/googlenet11_fix_all_other_layers"
 solver_mode: GPU

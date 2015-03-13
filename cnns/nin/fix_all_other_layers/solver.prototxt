@@ -1,4 +1,4 @@
-net: "/root/cs231n-project/cnns/nin/train_val.prototxt"
+net: "/root/cs231n-project/cnns/nin/fix_all_other_layers/train_val.prototxt"
 test_iter: 48
 test_interval: 200
 base_lr: 0.01
@@ -10,5 +10,5 @@ max_iter: 450000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 10000
-snapshot_prefix: "/root/cs231n-project/cnns/nin/snapshots/nin11"
+snapshot_prefix: "/root/cs231n-project/cnns/nin/fix_all_other_layers/snapshots/nin11_fix_all_other_layers"
 solver_mode: GPU

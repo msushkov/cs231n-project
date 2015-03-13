@@ -18,34 +18,61 @@ CHUNK_SIZE = 200
 # (if we are, then the label indices will be messed up so need to account for that)
 PREDICTING_1000_CLASSES = True
 
-# model 1 - not finetuned CaffeNet
-#PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
-#MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
-#MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
-
-# model 2 - finetuned CaffeNet
-#PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/snapshots/alexnet11_iter_4000.caffemodel"
-#MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/deploy.prototxt"
-#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # model 3 - cnn3
 #PRETRAINED = "/root/cs231n-project/cnns/cnn3/snapshots/cnn3_iter_2000.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/cnn3/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
 
+
+
+# CaffeNet - not finetuned
+#PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
+#MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
+#MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
+
+# CaffeNet - finetuned (only last layer trained)
+#PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/fix_all_other_layers/snapshots/alexnet-11_fix_all_other_layers_iter_1000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/fix_all_other_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# CaffeNet - finetuned (all layers trained)
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/snapshots/alexnet-11_train_all_layers_iter_1000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+
+
 # GoogleNet - not finetuned
 #PRETRAINED = "/root/cs231n-project/cnns/googlenet/reference_model/bvlc_googlenet.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/googlenet/reference_model/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
-# GoogleNet - finetuned
-PRETRAINED = "/root/cs231n-project/cnns/googlenet/snapshots/googlenet11_iter_2000.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/googlenet/deploy.prototxt"
-MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+# GoogleNet - finetuned (only last layer trained)
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/fix_all_other_layers/snapshots/googlenet11_fix_all_other_layers_iter_2000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/fix_all_other_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# GoogleNet - finetuned (all layers trained)
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/snapshots/googlenet11_train_all_layers_iter_2000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+
 
 # NIN - not finetuned
 #PRETRAINED = "/root/cs231n-project/cnns/nin/reference_model/nin_imagenet.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/nin/reference_model/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# NIN - finetuned (only last layer trained)
+#PRETRAINED = "/root/cs231n-project/cnns/nin/fix_all_other_layers/nin11_fix_all_other_layers_iter_1000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/nin/fix_all_other_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# NIN - finetuned (all layers trained)
+#PRETRAINED = "/root/cs231n-project/cnns/nin/train_all_layers/nin11_train_all_layers_iter_1000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/nin/train_all_layers/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 

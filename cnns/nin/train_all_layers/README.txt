@@ -1,0 +1,1 @@
+NIN retrained with a new last layer.

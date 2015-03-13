@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 
-REFERENCE_MODEL=reference_model/nin_imagenet.caffemodel
-
 dir=$(pwd)
 
-LOG_FILE=$dir/train_output.txt
+REFERENCE_MODEL=$dir/reference_model/nin_imagenet.caffemodel
+
+LOG_FILE=$dir/train_output_nin.txt
 
 cd $CAFFE_ROOT
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-REFERENCE_MODEL=reference_model/bvlc_googlenet.caffemodel
-
 dir=$(pwd)
+
+REFERENCE_MODEL=$dir/reference_model/bvlc_googlenet.caffemodel
 
 LOG_FILE=$dir/train_output_googlenet.txt
 

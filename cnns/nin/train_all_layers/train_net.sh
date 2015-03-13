@@ -2,7 +2,7 @@
 
 dir=$(pwd)
 
-REFERENCE_MODEL=$dir/reference_model/nin_imagenet.caffemodel
+REFERENCE_MODEL=$dir/../reference_model/nin_imagenet.caffemodel
 
 LOG_FILE=$dir/train_output.txt
 

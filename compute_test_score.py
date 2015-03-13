@@ -34,8 +34,13 @@ PREDICTING_1000_CLASSES = True
 #MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
 
 # GoogleNet - not finetuned
-PRETRAINED = "/root/cs231n-project/cnns/googlenet/reference_model/bvlc_googlenet.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/googlenet/reference_model/deploy.prototxt"
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/reference_model/bvlc_googlenet.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/reference_model/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# GoogleNet - finetuned
+PRETRAINED = "/root/cs231n-project/cnns/googlenet/snapshots/googlenet11_iter_2000.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/googlenet/deploy.prototxt"
 MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # NIN - not finetuned

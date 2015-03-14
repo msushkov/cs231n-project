@@ -11,7 +11,12 @@ import os.path
 ###
 
 # for which directory do we want to generate the caffe.txt file?
-DIR = "../data/images/train/no_augmentations/imagenet/256"
+#DIR = "../data/images/train/no_augmentations/imagenet/256"
+DIR = "../data/images/train/no_augmentations/instagram_imagenet"
+DIR = "../data/images/train/all_augmentations/instagram_imagenet"
+DIR = "../data/images/train/all_augmentations/imagenet/256"
+DIR = "../data/images/train/tint_contrast_only/instagram_imagenet"
+DIR = "../data/images/train/tint_contrast_only/imagenet/256"
 
 ###############
 

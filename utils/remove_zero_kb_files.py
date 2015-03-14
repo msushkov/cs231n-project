@@ -7,8 +7,13 @@ import os
 
 # paths relative to the directory where this script lives
 DIRS = [
-	"../data/images/train/no_augmentations/imagenet/256",
-	"../data/images/val/instagram/227"
+	#"../data/images/train/no_augmentations/imagenet/256",
+	#"../data/images/val/instagram/227",
+	"../data/images/train/no_augmentations/instagram_imagenet",
+	"../data/images/train/tint_contrast_only/imagenet/256",
+	"../data/images/train/tint_contrast_only/instagram_imagenet",
+	"../data/images/train/all_augmentations/instagram_imagenet",
+	"../data/images/train/all_augmentations/imagenet/256",
 ]
 
 SIZE = 3000

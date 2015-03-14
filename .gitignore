@@ -1,5 +1,12 @@
 *.DS_Store
 
+data/
+*.jpg
+*.bz2
+*.binaryproto
+*.caffemodel
+!*mean.binaryproto
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

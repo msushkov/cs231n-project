@@ -10,6 +10,13 @@ export VAL_DATA_ROOT=/root/cs231n-project/data/images/val/instagram/227
 export TEST_DATA_ROOT=/root/cs231n-project/data/images/val/instagram/227
 
 
+export TRAIN_DATA_ROOT1=/root/cs231n-project/data/images/train/no_augmentations/instagram_imagenet
+export TRAIN_DATA_ROOT2=/root/cs231n-project/data/images/train/tint_contrast_only/imagenet/256
+export TRAIN_DATA_ROOT3=/root/cs231n-project/data/images/train/tint_contrast_only/instagram_imagenet
+export TRAIN_DATA_ROOT4=/root/cs231n-project/data/images/train/all_augmentations/imagenet/256
+export TRAIN_DATA_ROOT5=/root/cs231n-project/data/images/train/all_augmentations/instagram_imagenet
+
+
 # these are necessary only if we are evaluating a trained (or pre-trained) network on some test data
 export MODEL_FILE=/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt
 export PRETRAINED_NETWORK=/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel

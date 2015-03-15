@@ -16,7 +16,7 @@ CHUNK_SIZE = 200
 
 # are we testing on the out-of-the-box AlexNet/GoogLeNet/NIN that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
-PREDICTING_1000_CLASSES = True
+PREDICTING_1000_CLASSES = False
 
 
 # model 3 - cnn3
@@ -76,6 +76,35 @@ PREDICTING_1000_CLASSES = True
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 
+# Googlenet data experiments
+
+# no_aug_IM_IG
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/snapshots/no_aug_IM_IG_iter_.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# aug_1_IM
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/snapshots/googlenet11_train_all_layers_iter_.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# aug_1_IM_IG
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/snapshots/googlenet11_train_all_layers_iter_.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# aug_2_IM
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/snapshots/googlenet11_train_all_layers_iter_.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+# aug_2_IM_IG
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/snapshots/googlenet11_train_all_layers_iter_.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+
+
+# the val/test data
 GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
 
 GROUND_TRUTH_LABEL_FILE = os.path.join(GROUND_TRUTH_DIR, "caffe.txt")

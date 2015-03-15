@@ -13,7 +13,7 @@ import os.path
 ###
 
 # for which directory do we want to generate the caffe.txt file?
-DIR = "../data/images/val/instagram/227"
+DIR = "../test_data/instagram"
 
 ###############
 

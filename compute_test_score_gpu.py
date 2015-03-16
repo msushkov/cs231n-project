@@ -197,7 +197,7 @@ for key in label_to_filenames:
 	fnames = label_to_filenames[key]
 	random.shuffle(fnames)
 	fnames_limited = fnames[:num_test_files_per_cat]
-	for fname in fnames:
+	for fname in fnames_limited:
 		image_filenames.append(fname)
 
 

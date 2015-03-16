@@ -172,6 +172,8 @@ def load_label_file():
 	f = open(GROUND_TRUTH_LABEL_FILE, 'r')
 	image_labels = {}
 	for line in f:
+		if line.startswith('bicycle/bicycle_i_0629_0') or line.startswith('bicycle/bicycle_i_0561_0'):
+			print line
 		vals = line.strip().split()
 		image_filename = vals[0]
 		int_label = vals[1]

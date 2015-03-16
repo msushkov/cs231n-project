@@ -178,6 +178,10 @@ def load_label_file():
 		image_filename = vals[0]
 		int_label = vals[1]
 		image_labels[image_filename] = int(int_label)
+
+		if line.startswith('bicycle/bicycle_i_0629_0') or line.startswith('bicycle/bicycle_i_0561_0'):
+			print image_filename
+			print image_labels[image_filename]
 	f.close()
 	return image_labels
 

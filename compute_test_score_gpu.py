@@ -187,7 +187,7 @@ for key in image_labels:
 	label = image_labels[key]
 	if label not in label_to_filenames:
 		label_to_filenames[label] = []
-	label_to_filename[label].append(key)
+	label_to_filenames[label].append(key)
 
 # limit each ground truth label to have 300 filenames
 num_test_files_per_cat = 300

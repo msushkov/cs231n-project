@@ -170,6 +170,9 @@ net = caffe.Classifier(MODEL_FILE, PRETRAINED, mean=np.load(MEAN_FILE).mean(1).m
 def load_label_file():
 	c = 0
 	f = open(GROUND_TRUTH_LABEL_FILE, 'r')
+	data = f.readlines()
+	print data[:10]
+	print
 	image_labels = {}
 	for line in f:
 		c += 1

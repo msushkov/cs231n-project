@@ -328,6 +328,8 @@ for curr_filenames in filename_chunks:
 print "Scores: "
 total_num = 0
 total_acc = 0.0
+total_prec = 0.0
+total_recall = 0.0
 for true_class in gold_labels:
 	tp_val = tp[true_class]
 	fp_val = fp[true_class]
@@ -357,11 +359,16 @@ for true_class in gold_labels:
 		if recall == -1:
 			recall = 0
 
+		total_prec += precision
+		total_recall += recall
+
 		print "  True label %s -> # test points = %d; TP = %d; TN = %d; FP = %d; FN = %d; acc = %f; prec = %f; recall = %f" % \
 			(key_label[true_class], total, tp_val, tn_val, fp_val, fn_val, accuracy, precision, recall)
 
 print "Total # of test points = %d \n" % total_num
 print "Average accuracy = " + str(total_acc / float(total_num)) + "\n"
+print "Average precision = " + str(total_prec / float(total_num)) + "\n"
+print "Average recall = " + str(total_recall / float(total_num)) + "\n"
 
 print examples
 

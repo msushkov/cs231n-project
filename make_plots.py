@@ -4,11 +4,11 @@ import numpy as np
 # data
 
 # lists of 5 accuracies, one for each class
-model1 = [0.788732, 0.620795, 0.802773, 0.857600, 0.790385]
-model2 = [0.730829, 0.649847, 0.688752, 0.804800, 0.750000]
-model3 = [0.503912, 0.669725, 0.580894, 0.788800, 0.759615]
+model1 = np.array([.72, .68, .84, .88, .6, .8, .72, .68, .88, .56]) #a
+model2 = np.array([.73, .5, .9, 1, .75, .94, .7, 0, 1, .64]) #p
+model3 = np.array([.67, .88, .75, .63, .56, .79, .64, 0, .4, .5]) #r
 
-ind = ind = np.arange(5)
+ind = ind = np.arange(10)
 width = 0.20
 
 fig, ax = plt.subplots()
@@ -19,7 +19,7 @@ rects3 = ax.bar(ind + 2 * width, model3, width, color='b')
 ax.set_ylabel('CNN classification top-1 accuracy', size=18)
 #ax.set_title('Scores by group and gender')
 ax.set_xticks(ind+width)
-ax.set_xticklabels( ('Bicycle', 'Xmas stocking', 'Harp', 'Persian cat', 'Soccer ball'), size=15 )
+ax.set_xticklabels( ('Bicycle', 'Broccoli', 'Xmas stocking', 'Harp', 'Paintball Marker', 'Persian cat', 'Sewing Machine', 'Skateboard', 'Soccer ball', 'Tennis ball'), size=15 )
 
 ax.legend( (rects1[0], rects2[0], rects3[0]), ('Model 1 (AlexNet)', 'Model 2 (finetuned AlexNet)', 'Model 3'), loc=4)
 

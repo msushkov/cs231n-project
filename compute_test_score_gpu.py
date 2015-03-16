@@ -19,9 +19,11 @@ TRASH = 10
 
 # are we testing on the out-of-the-box AlexNet/GoogLeNet/NIN that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
-PREDICTING_1000_CLASSES = True
+PREDICTING_1000_CLASSES = False
 
-K = 20 # take the top k when computing score
+K = 2 # take the top k when computing score
+
+num_test_files_per_cat = 400
 
 #if PREDICTING_1000_CLASSES:
 #	K = 20
@@ -67,9 +69,9 @@ MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # GoogleNet - finetuned (all layers trained)
-#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/snapshots/googlenet11_train_all_layers_iter_2000.caffemodel"
-#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
-#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/results_exp1/snapshots/final/googlenet11_train_all_layers_iter_1200.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 
 
@@ -211,8 +213,6 @@ assert TRASH in gold_labels
 
 #gold_labels = set([0])
 
-# limit each ground truth label to have 300 filenames
-num_test_files_per_cat = 50
 image_filenames = []
 #random.seed(10) # the shuffle will always give the same result. that's what we want
 for key in gold_labels:
@@ -261,7 +261,7 @@ for curr_filenames in filename_chunks:
 	print "Chunk %d out of %d" % (c, n)
 	c += 1
 
-	print(type(curr_filenames[0][0]))
+	#print(type(curr_filenames[0][0]))
 
 	images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in curr_filenames]
 	predictions = net.predict(images)
@@ -304,7 +304,7 @@ for curr_filenames in filename_chunks:
 		# fn: if prediction on image is 10 or y != x and fiverr label is x
 		# tn: if prediction on image is 10 and fiverr label is 10
 
-		print filename, class_label, fiverr_label, top_k_labels
+		#print filename, class_label, fiverr_label, top_k_labels
 
 		if class_label in top_k_labels:
 			if fiverr_label == TRASH:

@@ -190,13 +190,13 @@ def get_class_label(filename):
 # mapping of filename -> ground truth label
 image_labels = load_label_file()
 
-# mapping of ground truth label -> list of filenames
+# mapping of directory label -> list of filenames
 label_to_filenames = {}
-for key in image_labels:
-	label = image_labels[key]
+for filename1 in image_labels:
+	label = get_class_label(filename1)
 	if label not in label_to_filenames:
 		label_to_filenames[label] = []
-	label_to_filenames[label].append(key)
+	label_to_filenames[label].append(label_to_filenames)
 
 # a set of all possible correct labels
 gold_labels = set(image_labels.values())
@@ -212,7 +212,7 @@ assert TRASH in gold_labels
 #gold_labels = set([0])
 
 # limit each ground truth label to have 300 filenames
-num_test_files_per_cat = 10
+num_test_files_per_cat = 300
 image_filenames = []
 #random.seed(10) # the shuffle will always give the same result. that's what we want
 for key in gold_labels:
@@ -263,6 +263,7 @@ for curr_filenames in filename_chunks:
 	predictions = net.predict(images)
 
 	for i, filename in enumerate(curr_filenames):
+
 		curr_predictions = predictions[i]
 
 		if PREDICTING_1000_CLASSES:

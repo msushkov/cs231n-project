@@ -192,14 +192,16 @@ for key in image_labels:
 # limit each ground truth label to have 300 filenames
 num_test_files_per_cat = 300
 image_filenames = []
-random.seed(10) # the shuffle will always give the same result. that's what we want
+#random.seed(10) # the shuffle will always give the same result. that's what we want
 for key in label_to_filenames:
 	fnames = label_to_filenames[key]
-	random.shuffle(fnames)
+	#random.shuffle(fnames)
 	fnames_limited = fnames[:num_test_files_per_cat]
 	for fname in fnames_limited:
 		image_filenames.append(fname)
 
+
+print len(image_filenames)
 
 # a set of all possible correct labels
 gold_labels = set(image_labels.values())

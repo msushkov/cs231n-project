@@ -175,16 +175,10 @@ def load_label_file():
 	f = open(GROUND_TRUTH_LABEL_FILE, 'r')
 	image_labels = {}
 	for line in f:
-		if line.startswith('bicycle/bicycle_i_0629_0') or line.startswith('bicycle/bicycle_i_0561_0') or line.startswith('bicycle/bicycle_i_0295_0'):
-			print line
 		vals = line.strip().split()
 		image_filename = vals[0]
 		int_label = vals[1]
 		image_labels[image_filename] = int(int_label)
-
-		if line.startswith('bicycle/bicycle_i_0629_0') or line.startswith('bicycle/bicycle_i_0561_0') or line.startswith('bicycle/bicycle_i_0295_0'):
-			print image_filename
-			print image_labels[image_filename]
 	f.close()
 	return image_labels
 
@@ -215,7 +209,7 @@ if PREDICTING_1000_CLASSES:
 
 assert TRASH in gold_labels
 
-gold_labels = set([0])
+#gold_labels = set([0])
 
 # limit each ground truth label to have 300 filenames
 num_test_files_per_cat = 300
@@ -305,7 +299,7 @@ for curr_filenames in filename_chunks:
 		# fn: if prediction on image is 10 or y != x and fiverr label is x
 		# tn: if prediction on image is 10 and fiverr label is 10
 
-		print filename, class_label, fiverr_label, top_k_labels
+		#print filename, class_label, fiverr_label, top_k_labels
 
 		if class_label in top_k_labels:
 			if fiverr_label == TRASH:

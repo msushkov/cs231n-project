@@ -107,7 +107,7 @@ layer {
     num_output: 11
   }
 }
-ayer {
+layer {
   name: "prob"
   type: "Softmax"
   bottom: "fc6"

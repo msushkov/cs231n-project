@@ -201,7 +201,9 @@ if PREDICTING_1000_CLASSES:
 		if x not in alexnet_label_set:
 			gold_labels.remove(x)
 
-gold_labels.remove(TRASH)
+#gold_labels.remove(TRASH)
+
+assert TRASH not in gold_labels
 
 # limit each ground truth label to have 300 filenames
 num_test_files_per_cat = 300

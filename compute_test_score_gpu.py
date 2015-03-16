@@ -216,6 +216,8 @@ num_test_files_per_cat = 300
 image_filenames = []
 #random.seed(10) # the shuffle will always give the same result. that's what we want
 for key in gold_labels:
+	if key == TRASH: continue
+	
 	fnames = label_to_filenames[key]
 	#random.shuffle(fnames)
 	fnames_limited = fnames[:num_test_files_per_cat]

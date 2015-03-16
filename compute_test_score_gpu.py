@@ -18,7 +18,7 @@ CHUNK_SIZE = 200
 # (if we are, then the label indices will be messed up so need to account for that)
 PREDICTING_1000_CLASSES = True
 
-K = 1 # take the top k when computing score
+K = 5 # take the top k when computing score
 
 #if PREDICTING_1000_CLASSES:
 #	K = 20
@@ -29,6 +29,11 @@ K = 1 # take the top k when computing score
 #MODEL_FILE = "/root/cs231n-project/cnns/cnn3/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
 
+
+# baseline_cnn
+#PRETRAINED = "/root/cs231n-project/cnns/baseline_cnn/snapshots/baseline_cnn_iter_.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/baseline_cnn/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
 
 
 # CaffeNet - not finetuned
@@ -314,7 +319,7 @@ for true_class in gold_labels:
 			(key_label[true_class], total, tp_val, tn_val, fp_val, fn_val, accuracy, precision, recall)
 
 print "Total # of test points = %d \n" % total_num
-print "Average accuracy = %f \n" % total_acc / float(total_num)
+print "Average accuracy = " + str(total_acc / float(total_num)) + "\n"
 
 print examples
 

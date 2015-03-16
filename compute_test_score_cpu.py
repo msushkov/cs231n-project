@@ -18,7 +18,7 @@ CHUNK_SIZE = 200
 # (if we are, then the label indices will be messed up so need to account for that)
 PREDICTING_1000_CLASSES = True
 
-K = 1 # take the top k when computing score
+K = 5 # take the top k when computing score
 
 #if PREDICTING_1000_CLASSES:
 #	K = 20
@@ -314,7 +314,7 @@ for true_class in gold_labels:
 			(key_label[true_class], total, tp_val, tn_val, fp_val, fn_val, accuracy, precision, recall)
 
 print "Total # of test points = %d \n" % total_num
-print "Average accuracy = %f \n" % total_acc / float(total_num)
+print "Average accuracy = " + str(total_acc / float(total_num)) + "\n"
 
 print examples
 

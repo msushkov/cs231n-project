@@ -9,5 +9,5 @@ display: 50
 max_iter: 20000
 weight_decay: 0.0005
 snapshot: 300
-snapshot_prefix: "/root/cs231n-project/cnns/baseline_cnn/snapshots"
+snapshot_prefix: "/root/cs231n-project/cnns/baseline_cnn/snapshots/baseline_cnn"
 solver_type: ADAGRAD

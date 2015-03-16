@@ -196,7 +196,7 @@ for filename1 in image_labels:
 	label = get_class_label(filename1)
 	if label not in label_to_filenames:
 		label_to_filenames[label] = []
-	label_to_filenames[label].append(label_to_filenames)
+	label_to_filenames[label].append(filename1)
 
 # a set of all possible correct labels
 gold_labels = set(image_labels.values())

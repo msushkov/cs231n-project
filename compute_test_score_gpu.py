@@ -369,8 +369,8 @@ for true_class in gold_labels:
 
 print "Total # of test points = %d \n" % total_num
 print "Average accuracy = " + str(total_acc / float(total_num)) + "\n"
-print "Average precision = " + str(total_prec / float(total_num)) + "\n"
-print "Average recall = " + str(total_recall / float(total_num)) + "\n"
+print "Average precision = " + str(total_prec / float(len(gold_labels))) + "\n"
+print "Average recall = " + str(total_recall / float(len(gold_labels))) + "\n"
 
 print examples
 

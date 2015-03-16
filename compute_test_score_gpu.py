@@ -21,9 +21,9 @@ TRASH = 10
 # (if we are, then the label indices will be messed up so need to account for that)
 PREDICTING_1000_CLASSES = False
 
-K = 2 # take the top k when computing score
+K = 1 # take the top k when computing score
 
-num_test_files_per_cat = 400
+num_test_files_per_cat = 50
 
 #if PREDICTING_1000_CLASSES:
 #	K = 20
@@ -36,24 +36,24 @@ num_test_files_per_cat = 400
 
 
 # baseline_cnn
-#PRETRAINED = "/root/cs231n-project/cnns/baseline_cnn/snapshots/baseline_cnn_iter_.caffemodel"
+#PRETRAINED = "/root/cs231n-project/cnns/baseline_cnn/snapshots/baseline_cnn_iter_1500.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/baseline_cnn/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
 
 
 # CaffeNet - not finetuned
-PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
-MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
-MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
+#PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
+#MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
+#MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
 
 # CaffeNet - finetuned (only last layer trained)
-#PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/fix_all_other_layers/snapshots/alexnet-11_fix_all_other_layers_iter_1000.caffemodel"
-#MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/fix_all_other_layers/deploy.prototxt"
-#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/fix_all_other_layers/results_exp1/snapshots/final/alexnet11_fix_all_other_layers_iter_400.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/fix_all_other_layers/deploy.prototxt"
+MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # CaffeNet - finetuned (all layers trained)
-#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/snapshots/alexnet-11_train_all_layers_iter_1000.caffemodel"
-#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/train_all_layers/results_exp1/snapshots/final/alexnet11_train_all_layers_iter_1000.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/alexnet-11/train_all_layers/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 
@@ -64,14 +64,14 @@ MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # GoogleNet - finetuned (only last layer trained)
-#PRETRAINED = "/root/cs231n-project/cnns/googlenet/fix_all_other_layers/snapshots/googlenet11_fix_all_other_layers_iter_2000.caffemodel"
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/fix_all_other_layers/results_exp1/snapshots/final/googlenet11_fix_all_other_layers_iter_800.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/googlenet/fix_all_other_layers/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # GoogleNet - finetuned (all layers trained)
-PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/results_exp1/snapshots/final/googlenet11_fix_all_other_layers_iter_1200.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
-MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/results_exp1/snapshots/final/googlenet11_fix_all_other_layers_iter_1200.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 
 
@@ -81,12 +81,12 @@ MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # NIN - finetuned (only last layer trained)
-#PRETRAINED = "/root/cs231n-project/cnns/nin/fix_all_other_layers/nin11_fix_all_other_layers_iter_1000.caffemodel"
+#PRETRAINED = "/root/cs231n-project/cnns/nin/fix_all_other_layers/results_exp1/snapshots/final/nin11_fix_all_other_layers_iter_800.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/nin/fix_all_other_layers/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # NIN - finetuned (all layers trained)
-#PRETRAINED = "/root/cs231n-project/cnns/nin/train_all_layers/nin11_train_all_layers_iter_1000.caffemodel"
+#PRETRAINED = "/root/cs231n-project/cnns/nin/train_all_layers/results_exp1/nin11_train_all_layers_iter_200.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/nin/train_all_layers/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 

@@ -16,7 +16,12 @@ CHUNK_SIZE = 200
 
 # are we testing on the out-of-the-box AlexNet/GoogLeNet/NIN that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
-PREDICTING_1000_CLASSES = False
+PREDICTING_1000_CLASSES = True
+
+K = 1 # take the top k when computing score
+
+#if PREDICTING_1000_CLASSES:
+#	K = 20
 
 
 # model 3 - cnn3
@@ -27,9 +32,9 @@ PREDICTING_1000_CLASSES = False
 
 
 # CaffeNet - not finetuned
-#PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
-#MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
-#MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
+PRETRAINED = "/root/caffe/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel"
+MODEL_FILE = "/root/caffe/models/bvlc_reference_caffenet/deploy.prototxt"
+MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
 
 # CaffeNet - finetuned (only last layer trained)
 #PRETRAINED = "/root/cs231n-project/cnns/alexnet-11/fix_all_other_layers/snapshots/alexnet-11_fix_all_other_layers_iter_1000.caffemodel"
@@ -105,7 +110,8 @@ PREDICTING_1000_CLASSES = False
 
 
 # the val/test data
-GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
+#GROUND_TRUTH_DIR = "/root/cs231n-project/data/images/val/instagram/227"
+GROUND_TRUTH_DIR = "/root/cs231n-project/test_data/instagram"
 
 GROUND_TRUTH_LABEL_FILE = os.path.join(GROUND_TRUTH_DIR, "caffe.txt")
 
@@ -117,11 +123,6 @@ alexnet_labels = {
 	283 : 5, # persiancat
 	806 : 8  # soccerball
 }
-
-K = 2 # take the top k when computing score
-
-if PREDICTING_1000_CLASSES:
-	K = 20
 
 TRASH = 10 # label for trash class
 

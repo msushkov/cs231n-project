@@ -1,4 +1,4 @@
-name: "cnn3"
+name: "baseline_cnn"
 input: "data"
 input_dim: 10
 input_dim: 3
@@ -23,32 +23,12 @@ layer {
   top: "conv1"
 }
 layer {
-  name: "pool1"
-  type: "Pooling"
-  bottom: "conv1"
-  top: "pool1"
-  pooling_param {
-    pool: MAX
-    kernel_size: 3
-    stride: 2
-  }
-}
-layer {
-  name: "drop1"
-  type: "Dropout"
-  bottom: "pool1"
-  top: "pool1"
-  dropout_param {
-    dropout_ratio: 0.4
-  }
-}
-layer {
   name: "conv2"
   type: "Convolution"
-  bottom: "pool1"
+  bottom: "conv1"
   top: "conv2"
   convolution_param {
-    num_output: 256
+    num_output: 128
     kernel_size: 5
   }
 }
@@ -70,50 +50,104 @@ layer {
   }
 }
 layer {
-  name: "drop2"
-  type: "Dropout"
+  name: "conv3"
+  type: "Convolution"
   bottom: "pool2"
-  top: "pool2"
-  dropout_param {
-    dropout_ratio: 0.4
-  }
-}
-layer {
-  name: "fc3"
-  type: "InnerProduct"
-  bottom: "pool2"
-  top: "fc3"
-  inner_product_param {
-    num_output: 128
+  top: "conv3"
+  convolution_param {
+    num_output: 256
+    kernel_size: 3
   }
 }
 layer {
   name: "relu3"
   type: "ReLU"
-  bottom: "fc3"
-  top: "fc3"
+  bottom: "conv3"
+  top: "conv3"
 }
 layer {
-  name: "drop3"
+  name: "conv4"
+  type: "Convolution"
+  bottom: "conv3"
+  top: "conv4"
+  convolution_param {
+    num_output: 512
+    kernel_size: 1
+  }
+}
+layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "conv4"
+  top: "conv4"
+}
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv4"
+  top: "pool4"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "drop1"
   type: "Dropout"
-  bottom: "fc3"
-  top: "fc3"
+  bottom: "pool4"
+  top: "pool4"
   dropout_param {
     dropout_ratio: 0.4
   }
 }
 layer {
-  name: "fc4"
+  name: "fc5"
   type: "InnerProduct"
-  bottom: "fc3"
-  top: "fc4"
+  bottom: "pool4"
+  top: "fc5"
+  inner_product_param {
+    num_output: 128
+  }
+}
+layer {
+  name: "relu5"
+  type: "ReLU"
+  bottom: "fc5"
+  top: "fc5"
+}
+layer {
+  name: "drop2"
+  type: "Dropout"
+  bottom: "fc5"
+  top: "fc5"
+  dropout_param {
+    dropout_ratio: 0.4
+  }
+}
+layer {
+  name: "fc6"
+  type: "InnerProduct"
+  bottom: "fc5"
+  top: "fc6"
   inner_product_param {
     num_output: 11
   }
 }
 layer {
-  name: "prob"
-  type: "Softmax"
-  bottom: "fc4"
-  top: "prob"
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "fc6"
+  bottom: "label"
+  top: "accuracy"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "fc6"
+  bottom: "label"
+  top: "loss"
 }

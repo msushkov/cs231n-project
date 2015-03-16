@@ -15,6 +15,8 @@ import random
 # feed chunks of this size into the cnn at a time to compute scores for all of them
 CHUNK_SIZE = 200
 
+TRASH = 10
+
 # are we testing on the out-of-the-box AlexNet/GoogLeNet/NIN that outputs a 1000-d vector?
 # (if we are, then the label indices will be messed up so need to account for that)
 PREDICTING_1000_CLASSES = True
@@ -134,6 +136,7 @@ alexnet_labels = {
 }
 
 alexnet_label_set = set(alexnet_labels.values())
+alexnet_label_set.add(TRASH)
 
 TRASH = 10 # label for trash class
 
@@ -209,12 +212,10 @@ if PREDICTING_1000_CLASSES:
 	for x in key_label:
 		if x not in alexnet_label_set:
 			gold_labels.remove(x)
-else:
-	gold_labels.remove(TRASH)
+
+assert TRASH in gold_labels
 
 gold_labels = set([0])
-
-assert TRASH not in gold_labels
 
 # limit each ground truth label to have 300 filenames
 num_test_files_per_cat = 300
@@ -345,6 +346,8 @@ total_acc = 0.0
 total_prec = 0.0
 total_recall = 0.0
 for true_class in gold_labels:
+	if true_class == TRASH: continue
+
 	tp_val = tp[true_class]
 	fp_val = fp[true_class]
 	tn_val = tn[true_class]

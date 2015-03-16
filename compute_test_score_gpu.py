@@ -223,8 +223,8 @@ for key in gold_labels:
 	for fname in fnames_limited:
 		image_filenames.append(fname)
 
-image_filenames = image_filenames[:100]
-image_filenames.append('bicycle/bicycle_i_0629_0.jpg')
+image_filenames = image_filenames[:10]
+#image_filenames.append('bicycle/bicycle_i_0629_0.jpg')
 print len(image_filenames)
 
 # chunk the filenames of all the images we want to test
@@ -299,7 +299,7 @@ for curr_filenames in filename_chunks:
 		# fn: if prediction on image is 10 or y != x and fiverr label is x
 		# tn: if prediction on image is 10 and fiverr label is 10
 
-		#print filename, class_label, fiverr_label, top_k_labels
+		print filename, class_label, fiverr_label, top_k_labels
 
 		if class_label in top_k_labels:
 			if fiverr_label == TRASH:

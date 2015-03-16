@@ -346,10 +346,16 @@ for true_class in gold_labels:
 		precision = -1.0
 		if tp_val + fp_val > 0:
 			precision = float(tp_val) / (tp_val + fp_val)
+
+		if precision == -1:
+			precision = 0
 		
 		recall = -1.0
 		if tp_val + fn_val > 0:
 			recall = float(tp_val) / (tp_val + fn_val)
+
+		if recall == -1:
+			recall = 0
 
 		print "  True label %s -> # test points = %d; TP = %d; TN = %d; FP = %d; FN = %d; acc = %f; prec = %f; recall = %f" % \
 			(key_label[true_class], total, tp_val, tn_val, fp_val, fn_val, accuracy, precision, recall)

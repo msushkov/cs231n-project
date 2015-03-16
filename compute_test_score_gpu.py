@@ -2,6 +2,7 @@
 
 import sys
 import os
+import random
 
 caffe_root = os.environ['CAFFE_ROOT']
 sys.path.insert(0, caffe_root + 'python')
@@ -18,7 +19,7 @@ CHUNK_SIZE = 200
 # (if we are, then the label indices will be messed up so need to account for that)
 PREDICTING_1000_CLASSES = True
 
-K = 5 # take the top k when computing score
+K = 1 # take the top k when computing score
 
 #if PREDICTING_1000_CLASSES:
 #	K = 20
@@ -180,12 +181,32 @@ def get_class_label(filename):
 # mapping of filename -> ground truth label
 image_labels = load_label_file()
 
+# mapping of ground truth label -> list of filenames
+label_to_filenames = {}
+for key in image_labels:
+	label = image_labels[key]
+	if label not in label_to_filenames:
+		label_to_filenames[label] = []
+	label_to_filename[label].append(key)
+
+# limit each ground truth label to have 300 filenames
+num_test_files_per_cat = 300
+image_filenames = []
+random.seed(10) # the shuffle will always give the same result. that's what we want
+for key in label_to_filenames:
+	fnames = label_to_filenames[key]
+	random.shuffle(fnames)
+	fnames_limited = fnames[:num_test_files_per_cat]
+	for fname in fnames:
+		image_filenames.append(fname)
+
+
 # a set of all possible correct labels
 gold_labels = set(image_labels.values())
 gold_labels.remove(TRASH)
 
 # chunk the filenames of all the images we want to test
-image_filenames = image_labels.keys()
+#image_filenames = image_labels.keys()
 filename_chunks = chunks(image_filenames, CHUNK_SIZE)
 
 # record errors by class label

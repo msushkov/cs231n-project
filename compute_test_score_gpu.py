@@ -201,6 +201,7 @@ for key in gold_labels:
 	fnames = label_to_filenames[key]
 	#random.shuffle(fnames)
 	fnames_limited = fnames[:num_test_files_per_cat]
+	print len(fnames_limited)
 	for fname in fnames_limited:
 		image_filenames.append(fname)
 

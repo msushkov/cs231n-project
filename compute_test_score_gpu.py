@@ -128,7 +128,9 @@ alexnet_labels = {
 	594 : 3, # harp
 	283 : 5, # persiancat
 	806 : 8, # soccerball
-	852 : 9 # tennisball
+	852 : 9, # tennisball
+	786 : 6, # sewingmachine
+	937 : 1  # broccoli
 }
 
 alexnet_label_set = set(alexnet_labels.values())

@@ -261,7 +261,7 @@ for curr_filenames in filename_chunks:
 	print "Chunk %d out of %d" % (c, n)
 	c += 1
 
-	print(type(curr_filenames))
+	print(type(curr_filenames[0]))
 
 	images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in curr_filenames]
 	predictions = net.predict(images)

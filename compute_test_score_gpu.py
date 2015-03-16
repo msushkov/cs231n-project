@@ -223,7 +223,7 @@ for key in gold_labels:
 	for fname in fnames_limited:
 		image_filenames.append(fname)
 
-image_filenames = image_filenames[:10]
+image_filenames = image_filenames[:100]
 image_filenames.append('bicycle/bicycle_i_0629_0.jpg')
 print len(image_filenames)
 

@@ -127,8 +127,11 @@ alexnet_labels = {
 	406 : 2, # christmasstocking
 	594 : 3, # harp
 	283 : 5, # persiancat
-	806 : 8  # soccerball
+	806 : 8, # soccerball
+	852 : 9 # tennisball
 }
+
+alexnet_label_set = set(alexnet_labels.values())
 
 TRASH = 10 # label for trash class
 
@@ -192,6 +195,12 @@ for key in image_labels:
 # a set of all possible correct labels
 gold_labels = set(image_labels.values())
 gold_labels.remove(TRASH)
+
+if PREDICTING_1000_CLASSES:
+	# remove from gold_labels the filenames that arent in alexnet's 1000-class output
+	for x in key_label:
+		if x not in alexnet_label_set:
+			gold_labels.remove(x)
 
 # limit each ground truth label to have 300 filenames
 num_test_files_per_cat = 300

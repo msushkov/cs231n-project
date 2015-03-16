@@ -23,7 +23,7 @@ PREDICTING_1000_CLASSES = False
 
 K = 2 # take the top k when computing score
 
-num_test_files_per_cat = 50
+num_test_files_per_cat = 25
 
 #if PREDICTING_1000_CLASSES:
 #	K = 20
@@ -86,17 +86,17 @@ num_test_files_per_cat = 50
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # NIN - finetuned (all layers trained)
-PRETRAINED = "/root/cs231n-project/cnns/nin/train_all_layers/results_exp1/snapshots/final/nin11_train_all_layers_iter_200.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/nin/train_all_layers/deploy.prototxt"
-MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+#PRETRAINED = "/root/cs231n-project/cnns/nin/train_all_layers/results_exp1/snapshots/final/nin11_train_all_layers_iter_200.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/nin/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 
 # Googlenet data experiments
 
 # no_aug_IM_IG
-#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/no_aug_IM_IG/snapshots/no_aug_IM_IG_iter_1500.caffemodel"
-#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
-#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/no_aug_IM_IG/snapshots/no_aug_IM_IG_iter_1500.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # aug_1_IM
 #PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/aug_1_IM/snapshots/googlenet11_fix_all_other_layers_iter_3500.caffemodel"
@@ -114,7 +114,7 @@ MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # aug_2_IM_IG 8000
-#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/aug_2_IM_IG/snapshots/googlenet11_train_all_layers_iter_.caffemodel"
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/aug_2_IM_IG/snapshots/googlenet11_fix_all_other_layers_iter_8000.caffemodel"
 #MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 

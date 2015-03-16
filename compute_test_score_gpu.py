@@ -200,8 +200,8 @@ if PREDICTING_1000_CLASSES:
 	for x in key_label:
 		if x not in alexnet_label_set:
 			gold_labels.remove(x)
-
-#gold_labels.remove(TRASH)
+else:
+	gold_labels.remove(TRASH)
 
 assert TRASH not in gold_labels
 

@@ -107,20 +107,9 @@ layer {
     num_output: 11
   }
 }
-layer {
-  name: "accuracy"
-  type: "Accuracy"
+ayer {
+  name: "prob"
+  type: "Softmax"
   bottom: "fc6"
-  bottom: "label"
-  top: "accuracy"
-  include {
-    phase: TEST
-  }
-}
-layer {
-  name: "loss"
-  type: "SoftmaxWithLoss"
-  bottom: "fc6"
-  bottom: "label"
-  top: "loss"
+  top: "prob"
 }

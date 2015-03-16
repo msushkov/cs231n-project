@@ -36,9 +36,9 @@ num_test_files_per_cat = 25
 
 
 # baseline_cnn
-#PRETRAINED = "/root/cs231n-project/cnns/baseline_cnn/snapshots/baseline_cnn_iter_1500.caffemodel"
-#MODEL_FILE = "/root/cs231n-project/cnns/baseline_cnn/deploy.prototxt"
-#MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
+PRETRAINED = "/root/cs231n-project/cnns/baseline_cnn/snapshots/baseline_cnn_iter_1500.caffemodel"
+MODEL_FILE = "/root/cs231n-project/cnns/baseline_cnn/deploy.prototxt"
+MEAN_FILE = "/root/cs231n-project/data/image_means/no_augmentations/imagenet/256/imagenet11_no_aug_mean.npy"
 
 
 # CaffeNet - not finetuned
@@ -94,9 +94,9 @@ num_test_files_per_cat = 25
 # Googlenet data experiments
 
 # no_aug_IM_IG
-PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/no_aug_IM_IG/snapshots/no_aug_IM_IG_iter_1500.caffemodel"
-MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
-MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
+#PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/no_aug_IM_IG/snapshots/no_aug_IM_IG_iter_1500.caffemodel"
+#MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
+#MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # aug_1_IM
 #PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/data_experiments/aug_1_IM/snapshots/googlenet11_fix_all_other_layers_iter_3500.caffemodel"

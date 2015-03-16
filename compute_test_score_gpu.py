@@ -205,6 +205,8 @@ if PREDICTING_1000_CLASSES:
 else:
 	gold_labels.remove(TRASH)
 
+gold_labels = set([0])
+
 assert TRASH not in gold_labels
 
 # limit each ground truth label to have 300 filenames
@@ -219,7 +221,7 @@ for key in gold_labels:
 	for fname in fnames_limited:
 		image_filenames.append(fname)
 
-
+image_filenames = image_filenames[:10]
 print len(image_filenames)
 
 # chunk the filenames of all the images we want to test
@@ -293,6 +295,8 @@ for curr_filenames in filename_chunks:
 		# tp: if prediction on image is x and fiverr label is x
 		# fn: if prediction on image is 10 or y != x and fiverr label is x
 		# tn: if prediction on image is 10 and fiverr label is 10
+
+		print filename, class_label, fiverr_label
 
 		if class_label in top_k_labels:
 			if fiverr_label == TRASH:

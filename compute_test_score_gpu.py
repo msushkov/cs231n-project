@@ -194,13 +194,14 @@ for key in image_labels:
 
 # a set of all possible correct labels
 gold_labels = set(image_labels.values())
-gold_labels.remove(TRASH)
 
 if PREDICTING_1000_CLASSES:
 	# remove from gold_labels the filenames that arent in alexnet's 1000-class output
 	for x in key_label:
 		if x not in alexnet_label_set:
 			gold_labels.remove(x)
+
+gold_labels.remove(TRASH)
 
 # limit each ground truth label to have 300 filenames
 num_test_files_per_cat = 300

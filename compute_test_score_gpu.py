@@ -340,7 +340,8 @@ total_acc = 0.0
 total_prec = 0.0
 total_recall = 0.0
 for true_class in gold_labels:
-	if true_class == TRASH: continue
+	if true_class == TRASH:
+		continue
 
 	tp_val = tp[true_class]
 	fp_val = fp[true_class]
@@ -352,7 +353,7 @@ for true_class in gold_labels:
 	total_acc += (tp_val + tn_val)
 
 	if total == 0:
-		print "  True label %s -> # test points = %d" (key_label[true_class], total)
+		print "  True label %s -> # test points = %d" % (key_label[true_class], total)
 	else:
 		accuracy = float(tp_val + tn_val) / (tp_val + fp_val + tn_val + fn_val)
 		

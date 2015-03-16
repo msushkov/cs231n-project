@@ -212,7 +212,7 @@ assert TRASH in gold_labels
 #gold_labels = set([0])
 
 # limit each ground truth label to have 300 filenames
-num_test_files_per_cat = 300
+num_test_files_per_cat = 10
 image_filenames = []
 #random.seed(10) # the shuffle will always give the same result. that's what we want
 for key in gold_labels:
@@ -223,7 +223,7 @@ for key in gold_labels:
 	for fname in fnames_limited:
 		image_filenames.append(fname)
 
-image_filenames = image_filenames[:10]
+#image_filenames = image_filenames[:10]
 #image_filenames.append('bicycle/bicycle_i_0629_0.jpg')
 print len(image_filenames)
 

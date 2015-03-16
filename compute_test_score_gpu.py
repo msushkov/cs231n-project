@@ -168,9 +168,13 @@ net = caffe.Classifier(MODEL_FILE, PRETRAINED, mean=np.load(MEAN_FILE).mean(1).m
 
 # Load into memory the filename -> label mapping
 def load_label_file():
+	c = 0
 	f = open(GROUND_TRUTH_LABEL_FILE, 'r')
 	image_labels = {}
 	for line in f:
+		c += 1
+		if c < 11:
+			print line
 		vals = line.strip().split()
 		image_filename = vals[0]
 		int_label = vals[1]

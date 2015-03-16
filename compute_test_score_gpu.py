@@ -217,7 +217,7 @@ image_filenames = []
 #random.seed(10) # the shuffle will always give the same result. that's what we want
 for key in gold_labels:
 	if key == TRASH: continue
-	
+
 	fnames = label_to_filenames[key]
 	#random.shuffle(fnames)
 	fnames_limited = fnames[:num_test_files_per_cat]
@@ -260,6 +260,8 @@ num_examples_to_show_fn = 10
 for curr_filenames in filename_chunks:
 	print "Chunk %d out of %d" % (c, n)
 	c += 1
+
+	print(type(curr_filenames))
 
 	images = [caffe.io.load_image(os.path.join(GROUND_TRUTH_DIR, name)) for name in curr_filenames]
 	predictions = net.predict(images)

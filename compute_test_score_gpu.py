@@ -69,7 +69,7 @@ MEAN_FILE = "/root/caffe/data/ilsvrc12/imagenet_mean.npy"
 #MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
 # GoogleNet - finetuned (all layers trained)
-PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/results_exp1/snapshots/final/googlenet11_train_all_layers_iter_1200.caffemodel"
+PRETRAINED = "/root/cs231n-project/cnns/googlenet/train_all_layers/results_exp1/snapshots/final/googlenet11_fix_all_other_layers_iter_1200.caffemodel"
 MODEL_FILE = "/root/cs231n-project/cnns/googlenet/train_all_layers/deploy.prototxt"
 MEAN_FILE = "/root/cs231n-project/data/image_means/ilsvrc12/imagenet_mean.npy"
 
